@@ -1,18 +1,11 @@
-local _, ui = pcall(require, "harpoon.ui")
-local ok, mark = pcall(require, "harpoon.mark")
+local mark = require("harpoon.mark")
+local ui = require("harpoon.ui")
 
-if not ok then
-    return
-end
+vim.keymap.set("n", "<leader>a", mark.add_file)
+vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 
-local nnoremap = require("wayneblink.keymap").nnoremap;
+vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
+vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
+vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 
-local ui = require("harpoon.ui");
-local mark = require("harpoon.mark");
-
-nnoremap("<leader>a", function() mark.add_file() end)
-nnoremap("<C-e>", function() ui.toggle_quick_menu() end)
-nnoremap("<C-h>", function() ui.nav_file(1) end)
-nnoremap("<C-t>", function() ui.nav_file(2) end)
-nnoremap("<C-n>", function() ui.nav_file(3) end)
-nnoremap("<C-s>", function() ui.nav_file(4) end)

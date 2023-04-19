@@ -1,1 +1,1 @@
-require("wayneblink");
+require("wayneblink")
