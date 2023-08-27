@@ -15,7 +15,7 @@ return {
             enabled = true, -- when not enabled, neodev will not change any settings to the LSP server
             -- these settings will be used for your Neovim config directory
             runtime = true, -- runtime path
-            types = true, -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
+            types = true,   -- full signature, docs and completion of vim.api, vim.treesitter, vim.lsp and others
             plugins = true, -- installed opt or start plugins in packpath
             -- you can also specify the list of plugins to make available as a workspace library
             -- plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
@@ -30,6 +30,9 @@ return {
           pathStrict = true,
         }
       end,
+    },
+    {
+      "simrat39/rust-tools.nvim",
     },
     {
       "williamboman/mason.nvim",
@@ -84,7 +87,6 @@ return {
         }
 
         local disabled_servers = {
-          "jdtls",
         }
 
         mason_lspconfig.setup_handlers {
@@ -105,6 +107,12 @@ return {
             end
 
             lspconfig[server_name].setup(opts)
+            lspconfig["rust_analyzer"].setup({
+              rust_analyzer = function(_, opts)
+                require("rust-tools").setup({ server = opts })
+                return true
+              end
+            })
           end,
         }
       end,
