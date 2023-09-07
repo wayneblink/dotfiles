@@ -19,3 +19,5 @@ require("lazy").setup("plugins")
 pcall(require, "plugins.theme." .. name)
 
 vim.cmd.colorscheme(name)
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
