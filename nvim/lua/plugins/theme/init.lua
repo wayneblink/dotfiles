@@ -1,40 +1,25 @@
 return {
 	{
-		"folke/tokyonight.nvim",
-		lazy = true,
-		priority = 1000,
-	},
-	{
-		"luisiacc/gruvbox-baby",
-		lazy = true,
-		priority = 1000,
-	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		lazy = true,
-		priority = 1000,
-	},
-	{
-		"bluz71/vim-nightfly-colors",
-		name = "nightfly",
-		lazy = true,
-		priority = 1000,
-	},
-	{
 		"rose-pine/neovim",
 		name = "rose-pine",
-		lazy = true,
+		lazy = false,
 		priority = 1000,
-	},
-	{
-		"navarasu/onedark.nvim",
-		lazy = true,
-		priority = 1000,
-	},
-	{
-		"marko-cerovac/material.nvim",
-		lazy = true,
-		priority = 1000,
+		config = function()
+			require("rose-pine").setup({
+				dim_nc_background = false,
+				disable_background = true,
+				disable_float_background = true,
+				disable_italics = true,
+				highlight_groups = {
+					TelescopeBorder = { fg = "highlight_high", bg = "none" },
+					TelescopeNormal = { bg = "none" },
+					TelescopePromptNormal = { bg = "none" },
+					TelescopeResultsNormal = { fg = "subtle", bg = "none" },
+					TelescopeSelection = { fg = "text", bg = "base" },
+					TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
+				},
+			})
+			vim.cmd.colorscheme("rose-pine")
+		end,
 	},
 }
