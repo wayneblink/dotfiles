@@ -49,6 +49,8 @@ return {
 				local mason_lspconfig = require("mason-lspconfig")
 				local lspconfig = require("lspconfig")
 
+				local util = require("lspconfig.util")
+
 				require("lspconfig.ui.windows").default_options.border = "rounded"
 
 				local auto_install = {
@@ -58,7 +60,6 @@ return {
 					"rust_analyzer",
 					"gopls",
 					"lua_ls",
-					"cmake",
 					"clangd",
 					"pyright",
 					"intelephense",
@@ -106,6 +107,19 @@ return {
 						end
 
 						lspconfig[server_name].setup(opts)
+						lspconfig["gopls"].setup({
+							root_dir = function(fname)
+								-- see: https://github.com/neovim/nvim-lspconfig/issues/804
+								local mod_cache = vim.trim(vim.fn.system("go env GOMODCACHE"))
+								if fname:sub(1, #mod_cache) == mod_cache then
+									local clients = vim.lsp.get_active_clients({ name = "gopls" })
+									if #clients > 0 then
+										return clients[#clients].config.root_dir
+									end
+								end
+								return util.root_pattern("go.work")(fname) or util.root_pattern("go.mod", ".git")(fname)
+							end,
+						})
 						lspconfig["rust_analyzer"].setup({
 							rust_analyzer = function(_, opts)
 								require("rust-tools").setup({ server = opts })
