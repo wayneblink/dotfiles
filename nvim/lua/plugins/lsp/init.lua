@@ -59,7 +59,6 @@ return {
 					"jsonls",
 					"rust_analyzer",
 					"gopls",
-					"htmx-lsp",
 					"lua_ls",
 					"clangd",
 					"pyright",
