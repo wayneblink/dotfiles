@@ -64,7 +64,6 @@ return {
 					"pyright",
 					"intelephense",
 					"cssls",
-					"html",
 					"jdtls",
 					"yamlls",
 					"vimls",
@@ -120,11 +119,10 @@ return {
 								return util.root_pattern("go.work")(fname) or util.root_pattern("go.mod", ".git")(fname)
 							end,
 						})
-						lspconfig["rust_analyzer"].setup({
-							rust_analyzer = function(_, opts)
-								require("rust-tools").setup({ server = opts })
-								return true
-							end,
+						lspconfig["tsserver"].setup({
+							preferences = {
+								disableSuggestions = true,
+							},
 						})
 					end,
 				})

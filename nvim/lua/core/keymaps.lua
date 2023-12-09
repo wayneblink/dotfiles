@@ -30,6 +30,13 @@ vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>")
 
 vim.keymap.set("n", "<M-CR>", ":lua vim.lsp.buf.code_action()<cr>")
 
+vim.keymap.set("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>")
+vim.keymap.set("n", "<leader>dos", function()
+	local widgets = require("dap.ui.widgets")
+	local sidebar = widgets.sidebar(widgets.scopes)
+	sidebar.open()
+end)
+
 vim.keymap.set("n", "<leader>xx", function()
 	require("trouble").open()
 end)
