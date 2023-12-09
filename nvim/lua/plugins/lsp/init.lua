@@ -13,8 +13,11 @@ return {
     },
     config = function()
       local lspconfig = require("lspconfig")
+      local util = require("lspconfig.util")
       local mason_lspconfig = require("mason-lspconfig")
       local disabled_servers = {}
+      local on_attach = require("plugins.lsp.handlers").on_attach
+      local capabilities = require("plugins.lsp.handlers").capabilities
 
       mason_lspconfig.setup_handlers({
         function(server_name)
@@ -24,8 +27,8 @@ return {
             end
           end
           local opts = {
-            on_attach = require("plugins.lsp.handlers").on_attach,
-            capabilities = require("plugins.lsp.handlers").capabilities,
+            on_attach,
+            capabilities,
           }
 
           local require_ok, server = pcall(require, "plugins.lsp.settings." .. server_name)
@@ -35,6 +38,10 @@ return {
 
           lspconfig[server_name].setup(opts)
           lspconfig["gopls"].setup({
+            on_attach,
+            capabilities,
+            cmd = { "gopls" },
+            filetypes = { "go", "gomod", "gowork", "gotmpl" },
             root_dir = function(fname)
               -- see: https://github.com/neovim/nvim-lspconfig/issues/804
               local mod_cache = vim.trim(vim.fn.system("go env GOMODCACHE"))
@@ -46,6 +53,15 @@ return {
               end
               return util.root_pattern("go.work")(fname) or util.root_pattern("go.mod", ".git")(fname)
             end,
+            settings = {
+              gopls = {
+                completeUnimported = true,
+                usePlaceholders = true,
+                analyses = {
+                  unusedparams = true,
+                }
+              }
+            }
           })
           local function organize_imports()
             local params = {
@@ -95,9 +111,11 @@ return {
     config = function()
       require("mason-tool-installer").setup({
         ensure_installed = {
+          "autopep8",
+          "flake8",
+          "js-debug-adapter",
           "prettierd",
           "stylua",
-          "js-debug-adapter",
         },
       })
     end,
