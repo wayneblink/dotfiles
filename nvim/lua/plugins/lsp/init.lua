@@ -99,6 +99,7 @@ return {
           "vimls",
           "cssls",
           "eslint",
+          "gradle_ls",
         },
       })
     end,
