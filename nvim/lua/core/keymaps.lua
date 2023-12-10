@@ -18,17 +18,9 @@ vim.keymap.set("n", "<leader>Y", '"+y')
 
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("n", "<leader><leader>", "<C-^>")
+vim.keymap.set("n", "<M-CR>", ":lua vim.lsp.buf.code_action()<cr>")
 
 vim.keymap.set("n", "Q", "<nop>")
-
-vim.keymap.set("n", "<C-p>", "<cmd>Telescope git_files<cr>")
-vim.keymap.set("n", "<leader>pf", "<cmd>Telescope find_files<cr>")
-vim.keymap.set("n", "<leader>ps", "<cmd>Telescope live_grep<cr>")
-vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>")
-vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>")
-vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>")
-
-vim.keymap.set("n", "<M-CR>", ":lua vim.lsp.buf.code_action()<cr>")
 
 vim.keymap.set("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>")
 vim.keymap.set("n", "<leader>dr", "<cmd>DapContinue<CR>")
