@@ -29,3 +29,4 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.api.nvim_set_option("clipboard", "unnamedplus")
+vim.cmd([[autocmd! ColorScheme * highlight FloatBorder guifg=#d3c6aa guibg=#2b3339]])
