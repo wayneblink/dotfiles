@@ -50,7 +50,11 @@ return {
           layout = "vertical",
           vertical = "up:40%",
         },
+        winhighlight = {
+          Normal = "Normal", FloatBorder = "DiagnosticInfo"
+        }
       },
+      hls = { border = "Normal" }
     })
   end,
 }
