@@ -1,32 +1,13 @@
 return {
   "hrsh7th/nvim-cmp",
-  event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {
-    "hrsh7th/cmp-buffer",         -- Buffer Completions
-    "hrsh7th/cmp-path",           -- Path Completions
-    "saadparwaiz1/cmp_luasnip",   -- Snippet Completions
-    "hrsh7th/cmp-nvim-lsp",       -- LSP Completions
-    "hrsh7th/cmp-nvim-lua",       -- Lua Completions
-    "hrsh7th/cmp-cmdline",        -- CommandLine Completions
-    "L3MON4D3/LuaSnip",           -- Snippet Engine
-    "rafamadriz/friendly-snippets", -- Bunch of Snippets
-    {
-      "windwp/nvim-autopairs",
-      config = function()
-        local autopairs = require("nvim-autopairs")
-
-        autopairs.setup({
-          check_ts = true, -- treesitter integration
-        })
-
-        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-        local cmp_status_ok, cmp = pcall(require, "cmp")
-        if not cmp_status_ok then
-          return
-        end
-        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({}))
-      end,
-    },
+    "hrsh7th/cmp-buffer",       -- Buffer Completions
+    "hrsh7th/cmp-path",         -- Path Completions
+    "saadparwaiz1/cmp_luasnip", -- Snippet Completions
+    "hrsh7th/cmp-nvim-lsp",     -- LSP Completions
+    "hrsh7th/cmp-nvim-lua",     -- Lua Completions
+    "hrsh7th/cmp-cmdline",      -- CommandLine Completions
+    "L3MON4D3/LuaSnip",         -- Snippet Engine
   },
   config = function()
     local cmp = require("cmp")
