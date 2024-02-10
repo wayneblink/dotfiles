@@ -112,8 +112,6 @@ return {
     config = function()
       require("mason-tool-installer").setup({
         ensure_installed = {
-          "autopep8",
-          "flake8",
           "js-debug-adapter",
           "prettierd",
           "stylua",
