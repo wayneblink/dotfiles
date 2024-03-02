@@ -1,0 +1,34 @@
+[alias]
+  ch = checkout
+  ci = commit
+  df = diff
+  l = log
+  ph = push
+  pl = pull
+  sh = show
+  st = status
+
+  rb = rebase
+  rbi = rebase -i
+
+  f = fetch
+  fa = fetch --all
+
+  r = reset
+  rh = reset --hard
+
+  dfst = diff --stat
+[commit]
+  verbose = true
+[init]
+  defaultBranch = main
+[log]
+  date = local
+[tag]
+  sort = version:refname
+[branch]
+  sort = -committerdate
+[rerere]
+  enabled = true
+[include]
+  path = config.local
