@@ -32,3 +32,9 @@
   enabled = true
 [include]
   path = config.local
+[merge]
+  conflictstyle = zdiff3
+[help]
+  autocorrect = prompt
+[diff]
+  algorithm = histogram
