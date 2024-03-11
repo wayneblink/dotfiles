@@ -33,6 +33,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "4adea17610d140a99c313e3f79a9dc01825d59ae" },
   "plenary.nvim": { "branch": "master", "commit": "4f71c0c4a196ceb656c824a70792f3df3ce6bb6d" },
   "rose-pine": { "branch": "main", "commit": "f977eeba34b030b37f93ece2fbd792477606203b" },
+  "rustaceanvim": { "branch": "master", "commit": "5dc35a075ad7c9d2f6493065e1e5970e4ad61504" },
   "trouble.nvim": { "branch": "main", "commit": "f1168feada93c0154ede4d1fe9183bf69bac54ea" },
   "vim-fugitive": { "branch": "master", "commit": "ded6eb9da375dbd60f04981e5b66f0d7a2c3bcda" }
 }
