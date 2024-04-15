@@ -40,6 +40,7 @@ return {
         fzf = {
           ["alt-s"] = "toggle",
           ["alt-a"] = "toggle-all",
+          ["ctrl-q"] = "select-all+accept",
         },
       },
       winopts = {
