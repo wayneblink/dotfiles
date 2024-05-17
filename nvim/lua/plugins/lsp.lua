@@ -11,6 +11,7 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
+    "onsails/lspkind.nvim",
   },
   config = function()
     local cmp = require("cmp")
@@ -55,6 +56,7 @@ return {
     })
 
     local cmp_select = { bedavior = cmp.SelectBehavior.Select }
+    local lspkind = require("lspkind")
 
     cmp.setup({
       snippet = {
@@ -62,11 +64,22 @@ return {
           require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
         end,
       },
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = "symbol_text",
+          maxwidth = 50,
+          ellipsis_char = "...",
+          show_labelDetails = true,
+        })
+      },
       mapping = cmp.mapping.preset.insert({
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-        ["<C-y>"] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-y>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+          { "i", "c" }
+        }),
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
