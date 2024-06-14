@@ -117,6 +117,8 @@ return {
         "lua_ls",
         "rust_analyzer",
         "tsserver",
+        "prettierd",
+        "autopep8",
       }
 
       vim.list_extend(ensure_installed, servers_to_install)
@@ -163,6 +165,10 @@ return {
       require("conform").setup {
         formatters_by_ft = {
           lua = { "stylua" },
+          javascript = { { "prettierd", "prettier" } },
+          javascriptreact = { { "prettierd", "prettier" } },
+          typescript = { { "prettierd", "prettier" } },
+          typescriptreact = { { "prettierd", "prettier" } },
         },
       }
 
