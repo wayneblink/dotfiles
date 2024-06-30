@@ -31,6 +31,7 @@ return {
       local lspconfig = require "lspconfig"
 
       local servers = {
+        basedpyright = true,
         bashls = true,
         gopls = {
           settings = {
@@ -118,7 +119,8 @@ return {
         "rust_analyzer",
         "tsserver",
         "prettierd",
-        "autopep8",
+        "isort",
+        "black",
       }
 
       vim.list_extend(ensure_installed, servers_to_install)
@@ -169,6 +171,7 @@ return {
           javascriptreact = { { "prettierd", "prettier" } },
           typescript = { { "prettierd", "prettier" } },
           typescriptreact = { { "prettierd", "prettier" } },
+          python = { "isort", "black" },
         },
       }
 
