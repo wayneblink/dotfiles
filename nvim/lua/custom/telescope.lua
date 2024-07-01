@@ -1,14 +1,18 @@
-local data = assert(vim.fn.stdpath "data") --[[@as string]]
-
 require("telescope").setup {
   extensions = {
     wrap_results = true,
     fzf = {},
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown {},
-    },
   },
-  defaults = require("telescope.themes").get_dropdown {},
+  defaults = {
+    layout_strategy = "vertical",
+    layout_config = {
+      mirror = true,
+      prompt_position = "top",
+      height = 0.98,
+      width = 0.98,
+    },
+    sorting_strategy = "ascending",
+  },
 }
 
 pcall(require("telescope").load_extension, "fzf")
