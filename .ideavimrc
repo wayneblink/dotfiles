@@ -1,0 +1,89 @@
+let mapleader=" "
+
+""" list of intellij actions https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
+""" :actionlist <search-term>
+map <leader>fg <Action>(FindInPath)
+map <leader>fd <Action>(GotoFile)
+map <leader>rn <Action>(RenameElement)
+map <C-e> <Action>(RecentFiles)
+map gr <Action>(ShowUsages)
+map ]d <Action>(GotoNextError)
+map [d <Action>(GotoPreviousError)
+map <leader>vd <Action>(ShowErrorDescription)
+imap <C-h> <Action>(ParameterInfo)
+
+nmap <leader>tt <Action>(ActivateTerminalToolWindow)
+nmap <leader>rt <Action>(ActivateRunToolWindow)
+
+nmap <leader>xa <Action>(CloseAllEditors)
+nmap <leader>xb <Action>(CloseAllEditorsButActive)
+
+map <leader>z <Action>(ToggleZenMode)
+map <leader>p <Action>(TogglePresentationMode)
+
+""" run
+nmap <leader>rc <Action>(ContextRun)
+nmap <leader>rx <Action>(ChooseRunConfiguration)
+nmap <leader>rr <Action>(Rerun)
+nmap <leader>rt <Action>(RunTests)
+nmap <leader>rs <Action>(Stop)
+
+""" goto
+nmap ga <Action>(GotoAction)
+nmap gc <Action>(GotoClass)
+nmap gf <Action>(GotoFile)
+nmap gs <Action>(GotoSymbol)
+nmap gt <Action>(GotoTest)
+nmap gT <Action>(TextSearchAction)
+nmap go <Action>(GotoSuperMethod)
+nmap gd <Action>(GotoDeclaration)
+nmap gD <Action>(GotoTypeDeclaration)
+nmap gi <Action>(GotoImplementation)
+nmap gI <Action>(QuickImplementations)
+nmap gn <Action>(ShowNavBar)
+
+nmap ZQ <Action>(CloseEditor)
+
+""" https://github.com/etBrains/ideavim/wiki/
+""" IdeaVim only
+set ideastatusicon=gray
+set idearefactormode=keep
+
+""" https://github.com/JetBrains/ideavim/wiki/IdeaVim-Plugins
+set commentary
+set surround
+""" https://github.com/JetBrains/ideavim/wiki/NERDTree-support
+set NERDTree
+
+""" NERDTree
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+nnoremap <TAB> :action PreviousTab<CR>
+nnoremap <S-TAB> :action NextTab<CR>
+nmap <leader>1 <Action>(GoToTab1)
+nmap <leader>2 <Action>(GoToTab2)
+nmap <leader>3 <Action>(GoToTab3)
+nmap <leader>4 <Action>(GoToTab4)
+nmap <leader>5 <Action>(GoToTab5)
+nmap <leader>6 <Action>(GoToTab6)
+nmap <leader>7 <Action>(GoToTab7)
+nmap <leader>8 <Action>(GoToTab8)
+nmap <leader>9 <Action>(GoToTab9)
+
+set inccommand="split"
+set smartcase=true
+set ignorecase=true
+set hlsearch=false
+set incsearch=true
+set nu
+set rnu
+set expandtab=true
+set smartindent=true
+set wrap=false
+set splitbelow=true
+set splitright=true
+set scrolloff=8
+set clipboard=unnamedplus
