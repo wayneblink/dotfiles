@@ -55,7 +55,7 @@ return {
         rust_analyzer = true,
 
         -- Probably want to disable formatting for this lang server
-        tsserver = true,
+        ts_ls = true,
 
         jsonls = {
           settings = {
@@ -117,7 +117,7 @@ return {
         "stylua",
         "lua_ls",
         "rust_analyzer",
-        "tsserver",
+        "ts_ls",
         "prettierd",
         "isort",
         "black",
