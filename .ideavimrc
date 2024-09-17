@@ -61,8 +61,8 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
-nnoremap <TAB> :action PreviousTab<CR>
-nnoremap <S-TAB> :action NextTab<CR>
+nnoremap <S-TAB> :action PreviousTab<CR>
+nnoremap <TAB> :action NextTab<CR>
 nmap <leader>1 <Action>(GoToTab1)
 nmap <leader>2 <Action>(GoToTab2)
 nmap <leader>3 <Action>(GoToTab3)
