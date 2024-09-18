@@ -1,4 +1,7 @@
 require("telescope").setup {
+  defaults = {
+    sorting_strategy = "ascending",
+  },
   extensions = {
     wrap_results = true,
     fzf = {},
