@@ -16,12 +16,7 @@ return {
       "b0o/SchemaStore.nvim",
     },
     config = function()
-      require("neodev").setup {
-        -- library = {
-        --   plugins = { "nvim-dap-ui" },
-        --   types = true,
-        -- },
-      }
+      require("neodev").setup {}
 
       local capabilities = nil
       if pcall(require, "cmp_nvim_lsp") then
@@ -54,7 +49,6 @@ return {
         cssls = true,
         rust_analyzer = true,
 
-        -- Probably want to disable formatting for this lang server
         ts_ls = true,
 
         jsonls = {
@@ -121,6 +115,7 @@ return {
         "prettierd",
         "isort",
         "black",
+        "jdtls",
       }
 
       vim.list_extend(ensure_installed, servers_to_install)
