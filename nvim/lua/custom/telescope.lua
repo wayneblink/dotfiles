@@ -3,16 +3,6 @@ require("telescope").setup {
     wrap_results = true,
     fzf = {},
   },
-  defaults = {
-    layout_strategy = "vertical",
-    layout_config = {
-      mirror = true,
-      prompt_position = "top",
-      height = 0.98,
-      width = 0.98,
-    },
-    sorting_strategy = "ascending",
-  },
 }
 
 pcall(require("telescope").load_extension, "fzf")
