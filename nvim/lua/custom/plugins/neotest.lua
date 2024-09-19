@@ -1,22 +1,17 @@
 return {
   {
     "rcasia/neotest-java",
-    ft = "java",
+  },
+  {
+    "marilari88/neotest-vitest",
+  },
+  {
+    "nvim-neotest/neotest",
     dependencies = {
-      "nvim-neotest/neotest",
-      dependencies = {
-        "nvim-neotest/nvim-nio",
-        "nvim-lua/plenary.nvim",
-        "antoinemadec/FixCursorHold.nvim",
-        "nvim-treesitter/nvim-treesitter",
-      },
-      opts = {
-        adapters = {
-          ["neotest-java"] = {
-            ignore_wrapper = false, -- whether to ignore maven/gradle wrapper
-          },
-        },
-      },
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
     },
     config = function()
       require("neotest").setup {
@@ -24,6 +19,7 @@ return {
           require "neotest-java" {
             ignore_wrapper = false, -- whether to ignore maven/gradle wrapper
           },
+          require "neotest-vitest" {},
         },
       }
 
