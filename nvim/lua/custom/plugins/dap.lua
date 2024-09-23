@@ -54,11 +54,13 @@ return {
 
       dap.configurations.java = {
         {
+          name = "local",
           javaExec = "java",
           request = "launch",
           type = "java",
         },
         {
+          name = "remote",
           type = "java",
           request = "attach",
           hostname = "127.0.0.1",
