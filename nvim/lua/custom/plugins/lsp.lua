@@ -116,6 +116,8 @@ return {
         "isort",
         "black",
         "jdtls",
+        "java-test",
+        "java-debug-adapter",
       }
 
       vim.list_extend(ensure_installed, servers_to_install)
