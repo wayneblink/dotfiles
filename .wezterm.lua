@@ -1,11 +1,12 @@
-local wezterm = require('wezterm')
+local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 config.enable_tab_bar = false
-config.font = wezterm.font('Berkeley Mono')
+config.font = wezterm.font("Berkeley Mono")
+config.warn_about_missing_glyphs = false
 
 config.keys = {
-  { key = 'Enter', mods = 'ALT', action = wezterm.action.DisableDefaultAssignment },
+	{ key = "Enter", mods = "ALT", action = wezterm.action.DisableDefaultAssignment },
 }
 
 return config

@@ -49,7 +49,13 @@ return {
         cssls = true,
         rust_analyzer = true,
 
-        ts_ls = true,
+        denols = {
+          root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+        },
+        ts_ls = {
+          root_dir = lspconfig.util.root_pattern "package.json",
+          single_file_support = false,
+        },
 
         jsonls = {
           settings = {
@@ -118,6 +124,7 @@ return {
         "jdtls",
         "java-test",
         "java-debug-adapter",
+        "deno",
       }
 
       vim.list_extend(ensure_installed, servers_to_install)
