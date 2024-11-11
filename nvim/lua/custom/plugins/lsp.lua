@@ -28,6 +28,10 @@ return {
       local servers = {
         basedpyright = true,
         bashls = true,
+        svelte = true,
+        templ = true,
+        cssls = true,
+        rust_analyzer = true,
         gopls = {
           settings = {
             gopls = {
@@ -43,12 +47,36 @@ return {
             },
           },
         },
-        lua_ls = true,
-        svelte = true,
-        templ = true,
-        cssls = true,
-        rust_analyzer = true,
-
+        lua_ls = {
+          settings = {
+            Lua = {
+              runtime = { version = "Llua 5.1" },
+              diagnostics = {
+                globals = { "bit", "vim", "it", "describe", "before_each", "after_each" },
+              },
+            },
+          },
+        },
+        ocamllsp = {
+          manual_install = true,
+          settings = {
+            codelens = { enable = true },
+            inlayHints = { enable = true },
+          },
+          filetypes = {
+            "ocaml",
+            "ocaml.interface",
+            "ocaml.menhir",
+            "ocaml.cram",
+          },
+          -- TODO: Check if i still need the filtypes stuff i had before
+        },
+        clangd = {
+          -- TODO: Could include cmd, but not sure those were all relevant flags.
+          --    looks like something i would have added while i was floundering
+          init_options = { clangdFileStatus = true },
+          filetypes = { "c" },
+        },
         denols = {
           root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
         },
@@ -56,7 +84,6 @@ return {
           root_dir = lspconfig.util.root_pattern "package.json",
           single_file_support = false,
         },
-
         jsonls = {
           settings = {
             json = {
@@ -65,7 +92,6 @@ return {
             },
           },
         },
-
         yamlls = {
           settings = {
             yaml = {
@@ -76,30 +102,6 @@ return {
               schemas = require("schemastore").yaml.schemas(),
             },
           },
-        },
-
-        ocamllsp = {
-          manual_install = true,
-          settings = {
-            codelens = { enable = true },
-            inlayHints = { enable = true },
-          },
-
-          filetypes = {
-            "ocaml",
-            "ocaml.interface",
-            "ocaml.menhir",
-            "ocaml.cram",
-          },
-
-          -- TODO: Check if i still need the filtypes stuff i had before
-        },
-
-        clangd = {
-          -- TODO: Could include cmd, but not sure those were all relevant flags.
-          --    looks like something i would have added while i was floundering
-          init_options = { clangdFileStatus = true },
-          filetypes = { "c" },
         },
       }
 
@@ -118,6 +120,7 @@ return {
         "lua_ls",
         "rust_analyzer",
         "ts_ls",
+        "eslint_d",
         "prettierd",
         "isort",
         "black",
@@ -171,20 +174,29 @@ return {
       require("conform").setup {
         formatters_by_ft = {
           lua = { "stylua" },
-          javascript = { { "prettierd", "prettier" } },
-          javascriptreact = { { "prettierd", "prettier" } },
-          typescript = { { "prettierd", "prettier" } },
-          typescriptreact = { { "prettierd", "prettier" } },
+          javascript = { "prettierd", "prettier" },
+          javascriptreact = { "prettierd", "prettier" },
+          typescript = { "prettierd", "prettier" },
+          typescriptreact = { "prettierd", "prettier" },
           python = { "isort", "black" },
+          ["_"] = { "trim_whitespace" },
+        },
+        default_format_opts = {
+          lsp_format = "fallback",
+        },
+        format_on_save = {
+          timeout_ms = 500,
         },
       }
 
       vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*",
         callback = function(args)
           require("conform").format {
             bufnr = args.buf,
             lsp_fallback = true,
             quiet = true,
+            async = true,
           }
         end,
       })
