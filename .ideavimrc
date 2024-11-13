@@ -87,3 +87,5 @@ set splitbelow=true
 set splitright=true
 set scrolloff=8
 set clipboard=unnamedplus
+set visualbell
+set noerrorbells
