@@ -12,8 +12,6 @@ opt.incsearch = true
 ----- Personal Preferences -----
 opt.nu = true
 opt.relativenumber = true
-opt.spelllang = "en_us"
-opt.spell = true
 
 opt.expandtab = true
 opt.smartindent = true
