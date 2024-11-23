@@ -31,3 +31,8 @@ end)
 vim.keymap.set("n", "<space>en", function()
   builtin.find_files { cwd = vim.fn.stdpath "config" }
 end)
+
+vim.api.nvim_set_hl(0, "TelescopeNormal", { link = "Normal" })
+vim.api.nvim_set_hl(0, "TelescopePromptNormal", { link = "Normal" })
+vim.api.nvim_set_hl(0, "TelescopeResultsNormal", { link = "Normal" })
+vim.api.nvim_set_hl(0, "TelescopePreviewNormal", { link = "Normal" })
