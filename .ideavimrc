@@ -11,6 +11,7 @@ map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
 map <leader>vd <Action>(ShowErrorDescription)
 imap <C-h> <Action>(ParameterInfo)
+imap <C-y> <Action>(EditorChooseLookupItemReplace)
 
 nmap <leader>tt <Action>(ActivateTerminalToolWindow)
 nmap <leader>rt <Action>(ActivateRunToolWindow)
