@@ -31,7 +31,6 @@ nmap <leader>rs <Action>(Stop)
 
 """ goto
 nmap ga <Action>(GotoAction)
-nmap gc <Action>(GotoClass)
 nmap gf <Action>(GotoFile)
 nmap gs <Action>(GotoSymbol)
 nmap gt <Action>(GotoTest)
