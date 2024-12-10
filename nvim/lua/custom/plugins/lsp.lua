@@ -2,7 +2,15 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "folke/neodev.nvim",
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+          library = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          },
+        },
+      },
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -16,8 +24,6 @@ return {
       "b0o/SchemaStore.nvim",
     },
     config = function()
-      require("neodev").setup {}
-
       local capabilities = nil
       if pcall(require, "cmp_nvim_lsp") then
         capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -77,12 +83,15 @@ return {
           init_options = { clangdFileStatus = true },
           filetypes = { "c" },
         },
-        denols = {
-          root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
-        },
         ts_ls = {
           root_dir = lspconfig.util.root_pattern "package.json",
           single_file_support = false,
+        },
+        denols = {
+          root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+        },
+        fsautocomplete = {
+          filetypes = { "fsharp" },
         },
         jsonls = {
           settings = {
@@ -151,7 +160,10 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
           local bufnr = args.buf
-          local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have valid client")
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if not client then
+            return
+          end
 
           vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
           vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = 0 })

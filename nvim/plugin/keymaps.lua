@@ -1,6 +1,5 @@
 local set = vim.keymap.set
 
-set("n", "K", vim.lsp.buf.hover)
 set("n", "<M-CR>", ":lua vim.lsp.buf.code_action()<cr>")
 set("n", "<leader>rn", vim.lsp.buf.rename)
 

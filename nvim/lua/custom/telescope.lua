@@ -1,6 +1,9 @@
 require("telescope").setup {
-  defaults = {
+  defaults = require("telescope.themes").get_ivy {
     sorting_strategy = "ascending",
+    layout_config = {
+      height = 0.75,
+    },
   },
   extensions = {
     wrap_results = true,
