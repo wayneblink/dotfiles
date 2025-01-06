@@ -5,6 +5,7 @@ let mapleader=" "
 map <leader>fg <Action>(FindInPath)
 map <leader>fd <Action>(GotoFile)
 map <leader>rn <Action>(RenameElement)
+map <C-o> <Action>(Back)
 map <C-e> <Action>(RecentFiles)
 map gr <Action>(ShowUsages)
 map ]d <Action>(GotoNextError)
