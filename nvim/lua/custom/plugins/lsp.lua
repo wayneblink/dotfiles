@@ -2,6 +2,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
+      "saghen/blink.cmp",
       {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -24,11 +25,7 @@ return {
       "b0o/SchemaStore.nvim",
     },
     config = function()
-      local capabilities = nil
-      if pcall(require, "cmp_nvim_lsp") then
-        capabilities = require("cmp_nvim_lsp").default_capabilities()
-      end
-
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
       local lspconfig = require "lspconfig"
 
       local servers = {
@@ -184,6 +181,8 @@ return {
 
       -- Autoformatting Setup
       require("conform").setup {
+        async = true,
+        lsp_fallback = true,
         formatters_by_ft = {
           lua = { "stylua" },
           javascript = { "prettierd", "prettier" },
@@ -198,6 +197,7 @@ return {
         },
         format_on_save = {
           timeout_ms = 500,
+          lsp_fallback = true,
         },
       }
 
@@ -205,10 +205,10 @@ return {
         pattern = "*",
         callback = function(args)
           require("conform").format {
+            async = true,
             bufnr = args.buf,
             lsp_fallback = true,
             quiet = true,
-            async = true,
           }
         end,
       })

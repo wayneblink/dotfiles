@@ -21,8 +21,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.o.background = "dark"
-
 -- Add lazy to the `runtimepath`, this allows us to `require` it.
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)

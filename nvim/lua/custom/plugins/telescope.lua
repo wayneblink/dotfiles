@@ -1,4 +1,3 @@
--- plugins/telescope.lua:
 return {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.8",
@@ -10,5 +9,6 @@ return {
   },
   config = function()
     require "custom.telescope"
+    require("custom.telescope-multigrep").setup()
   end,
 }
