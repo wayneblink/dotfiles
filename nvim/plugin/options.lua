@@ -1,41 +1,37 @@
-local opt = vim.opt
+local set = vim.opt
 
--- You have to turn this one on :)
-opt.inccommand = "split"
+set.signcolumn = "yes:1"
+set.inccommand = "split"
 
--- Best search settings :)
-opt.smartcase = true
-opt.ignorecase = true
-opt.hlsearch = false
-opt.incsearch = true
+set.smartcase = true
+set.ignorecase = true
+set.hlsearch = false
+set.incsearch = true
 
------ Personal Preferences -----
-opt.nu = true
-opt.relativenumber = true
+set.nu = true
+set.relativenumber = true
 
-opt.expandtab = true
-opt.smartindent = true
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.wrap = false
+set.expandtab = true
+set.smartindent = true
+set.tabstop = 2
+set.shiftwidth = 2
+set.wrap = false
 
-opt.splitbelow = true
-opt.splitright = true
+set.splitbelow = true
+set.splitright = true
 
-opt.signcolumn = "yes"
-opt.shada = { "'10", "<0", "s10", "h" }
+set.shada = { "'10", "<0", "s10", "h" }
 
-opt.termguicolors = true
-opt.clipboard = "unnamedplus"
+set.termguicolors = true
+set.clipboard = "unnamedplus"
 
-opt.scrolloff = 8
-opt.signcolumn = "yes"
+set.scrolloff = 8
 
 -- Don't have `o` add a comment
-opt.formatoptions:remove "o"
+set.formatoptions:remove "o"
 
-opt.updatetime = 50
-opt.swapfile = false
-opt.backup = false
-opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
-opt.undofile = true
+set.updatetime = 50
+set.swapfile = false
+set.backup = false
+set.undodir = os.getenv "HOME" .. "/.vim/undodir"
+set.undofile = true

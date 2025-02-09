@@ -2,6 +2,7 @@ return {
   {
     "echasnovski/mini.nvim",
     config = function()
+      require("mini.statusline").setup({ use_icons = true })
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -18,6 +19,13 @@ return {
       require("mini.surround").setup()
 
       require("mini.bracketed").setup()
-    end,
-  },
+
+      local indentscope = require "mini.indentscope"
+      indentscope.setup {
+        draw = {
+          animation = indentscope.gen_animation.none(),
+        },
+      }
+    end
+  }
 }
