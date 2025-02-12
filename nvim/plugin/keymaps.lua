@@ -4,6 +4,8 @@ local set = vim.keymap.set
 -- use defaults grn, gra, grr, gri, gO, ctrl-s, gf
 -- set in ideavimrc
 
+set("n", "<M-CR>", ":lua vim.lsp.buf.code_action()<cr>")
+
 set("n", "<c-j>", "<c-w><c-j>")
 set("n", "<c-k>", "<c-w><c-k>")
 set("n", "<c-l>", "<c-w><c-l>")
