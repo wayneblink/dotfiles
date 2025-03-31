@@ -2,6 +2,8 @@ return {
   {
     "echasnovski/mini.nvim",
     config = function()
+      require("mini.pairs").setup()
+
       require("mini.statusline").setup({ use_icons = true })
       -- Better Around/Inside textobjects
       --
