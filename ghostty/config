@@ -1,2 +1,10 @@
-font-family = "Berkeley Mono"
 theme = Dracula
+font-family = "Berkeley Mono"
+font-feature = -liga
+font-size = 20
+window-inherit-font-size = true
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+mouse-hide-while-typing = true

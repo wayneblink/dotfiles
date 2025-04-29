@@ -27,11 +27,18 @@ set.clipboard = "unnamedplus"
 
 set.scrolloff = 8
 
--- Don't have `o` add a comment
-set.formatoptions:remove "o"
-
 set.updatetime = 50
 set.swapfile = false
 set.backup = false
 set.undodir = os.getenv "HOME" .. "/.vim/undodir"
 set.undofile = true
+
+-- Don't have `o` add a comment
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = vim.api.nvim_create_augroup("FormatOptions", { clear = true }),
+  pattern = { "*" },
+  callback = function()
+    vim.opt_local.fo:remove("o")
+    vim.opt_local.fo:remove("r")
+  end,
+})
