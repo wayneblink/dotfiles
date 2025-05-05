@@ -1,7 +1,8 @@
 theme = tokyonight_night
-font-family = "Berkeley Mono"
+#font-family = "Berkeley Mono"
+font-family = JetBrains Mono
 font-feature = -liga
-font-size = 20
+font-size = 12
 window-inherit-font-size = true
 
 cursor-style = block
