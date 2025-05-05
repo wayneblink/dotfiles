@@ -5,7 +5,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/master.tar.gz;
+  home-manager = builtins.fetchTarball https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz;
 in
 {
   imports =
@@ -21,6 +21,8 @@ in
   };
 
   nix.settings.auto-optimise-store = true;
+
+  system.autoUpgrade.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.wayne = {
@@ -46,8 +48,6 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  system.autoUpgrade.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -85,7 +85,7 @@ in
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
