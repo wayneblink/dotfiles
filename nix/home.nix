@@ -13,6 +13,8 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     ./git.nix
     ./tmux.nix
@@ -25,9 +27,12 @@
     pkgs.direnv
     pkgs.htop
     pkgs.jq
+    pkgs.wget
     pkgs.tree
     pkgs.firefox
     pkgs.chromium
+    ((pkgs.ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
+    pkgs.vlc
     pkgs.ghostty
     pkgs.nodejs
     pkgs.lua-language-server
