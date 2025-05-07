@@ -18,6 +18,7 @@ return {
       local lspconfig = require("lspconfig")
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       local servers = {
+        astro = true,
         basedpyright = true,
         denols = {
           root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
