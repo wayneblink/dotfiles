@@ -36,6 +36,7 @@
     pkgs.ghostty
     pkgs.nodejs
     pkgs.lua-language-server
+    pkgs.typescript
     pkgs.typescript-language-server
     pkgs.basedpyright
     pkgs.gopls
