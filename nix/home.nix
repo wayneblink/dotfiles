@@ -24,18 +24,24 @@
     pkgs.fzf
     pkgs.ripgrep
     pkgs.gcc
-    pkgs.direnv
     pkgs.htop
     pkgs.jq
     pkgs.wget
     pkgs.tree
+    pkgs.mermaid-cli
+    pkgs.fd
     pkgs.firefox
     pkgs.chromium
     ((pkgs.ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
     pkgs.vlc
     pkgs.ghostty
     pkgs.nodejs
+    pkgs.deno
+    pkgs.prettierd
+    pkgs.rustfmt
     pkgs.lua-language-server
+    pkgs.luarocks
+    pkgs.stylua
     pkgs.astro-language-server
     pkgs.typescript
     pkgs.typescript-language-server
@@ -56,12 +62,20 @@
     # '')
   ];
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+  programs = {
+    home-manager.enable = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+    };
+    direnv = {
+        enable = true;
+        enableBashIntegration = true;
+        nix-direnv.enable = true;
+    };
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -102,5 +116,4 @@
     EDITOR = "nvim";
   };
 
-  programs.home-manager.enable = true;
 }
