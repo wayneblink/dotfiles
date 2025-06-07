@@ -12,29 +12,28 @@
   };
 
   home.packages = with pkgs; [
-    pkgs.coreutils-full
-    pkgs.fzf
-    pkgs.ripgrep
-    pkgs.gcc
-    pkgs.htop
-    pkgs.jq
-    pkgs.wget
-    pkgs.tree
-    pkgs.mermaid-cli
-    pkgs.fd
-    pkgs.nodejs
-    pkgs.deno
-    pkgs.prettierd
-    pkgs.rustfmt
-    pkgs.lua-language-server
-    pkgs.luarocks
-    pkgs.stylua
-    pkgs.astro-language-server
-    pkgs.typescript
-    pkgs.typescript-language-server
-    pkgs.basedpyright
-    pkgs.gopls
-    pkgs.rust-analyzer
+    coreutils-full
+    fzf
+    ripgrep
+    gcc
+    htop
+    jq
+    wget
+    tree
+    mermaid-cli
+    fd
+    nodejs
+    prettierd
+    rustfmt
+    lua-language-server
+    luarocks
+    stylua
+    astro-language-server
+    typescript
+    typescript-language-server
+    basedpyright
+    gopls
+    rust-analyzer
   ];
 
   programs = {
