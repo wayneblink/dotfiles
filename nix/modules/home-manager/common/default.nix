@@ -1,8 +1,8 @@
-{ 
-  outputs, 
-  userConfig, 
+{
+  outputs,
+  userConfig,
   pkgs,
-  ... 
+  ...
 }: {
   nixpkgs = {
     overlays = [
@@ -41,9 +41,10 @@
     fd
     firefox
     chromium
-    ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
+    # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
     vlc
     ghostty
+    starship
     nodejs
     prettierd
     rustfmt
@@ -67,18 +68,31 @@
       vimdiffAlias = true;
     };
     direnv = {
-        enable = true;
-        enableBashIntegration = true;
-        nix-direnv.enable = true;
+      enable = true;
+      enableBashIntegration = true;
+      nix-direnv.enable = true;
+    };
+    jujutsu = {
+      enable = true;
+      settings = {
+        user.name = "${userConfig.username}";
+        user.email = "${userConfig.email}";
+      };
+    };
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = false;
+      };
     };
   };
 
   # TODO
-  # home.file = {
-  #   ".config/nvim".source = ../../../../../nvim;
-  #   ".config/ghostty/config".source = ../../../../../ghostty/config;
-  #   ".bashrc".source = ../../../../../.bashrc;
-  # };
+  home.file = {
+    ".config/nvim".source = ../../../../nvim;
+    ".config/ghostty/config".source = ../../../../ghostty/config;
+    ".bashrc".source = ../../../../.bashrc;
+  };
 
   home.sessionVariables = {
     EDITOR = "nvim";

@@ -14,43 +14,43 @@
     };
   };
 
-  outputs = { 
-    self, 
+  outputs = {
+    self,
     nixpkgs,
     home-manager,
     darwin,
     ...
   }@ inputs: let
-    inherit (self) outputs;
+  inherit (self) outputs;
 
-    users = {
-      wayne = {
-	name = "wayne";
-	username = "wayneblink";
-        email = "darylblink@ymail.com";
+  users = {
+    wayne = {
+      name = "wayne";
+      username = "wayneblink";
+      email = "darylblink@ymail.com";
+    };
+  };
+
+  mkNixosConfiguration = hostname: username:
+    nixpkgs.lib.nixosSystem {
+      specialArgs = {
+        inherit inputs outputs hostname;
+        userConfig = users.${username};
+        nixosModules = "${self}/modules/nixos";
       };
+      modules = [ ./hosts/${hostname} ];
     };
 
-    mkNixosConfiguration = hostname: username:
-      nixpkgs.lib.nixosSystem {
-        specialArgs = {
-	  inherit inputs outputs hostname;
-	  userConfig = users.${username};
-	  nixosModules = "${self}/modules/nixos";
-	};
-	modules = [ ./hosts/${hostname} ];
+  mkHomeConfiguration = system: username: hostname:
+    home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs { inherit system; };
+      extraSpecialArgs = {
+        inherit inputs outputs;
+        userConfig = users.${username};
+        nhModules = "${self}/modules/home-manager";
       };
-
-    mkHomeConfiguration = system: username: hostname:
-      home-manager.lib.homeManagerConfiguration {
-	pkgs = import nixpkgs { inherit system; };
-        extraSpecialArgs = {
-	  inherit inputs outputs;
-	  userConfig = users.${username};
-	  nhModules = "${self}/modules/home-manager";
-	};
-	modules = [ ./home/${username}/${hostname} ];
-      };
+      modules = [ ./home/${username}/${hostname} ];
+    };
 
   in {
     nixosConfigurations = {
