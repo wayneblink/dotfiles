@@ -12,6 +12,7 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
   outputs = {
@@ -19,6 +20,7 @@
     nixpkgs,
     home-manager,
     darwin,
+    nix-homebrew,
     ...
   }@ inputs: let
   inherit (self) outputs;
@@ -62,6 +64,13 @@
       modules = [
         ./hosts/${hostname}
         home-manager.darwinModules.home-manager
+        nix-homebrew.darwinModules.nix-homebrew {
+          nix-homebrew = {
+            enable = true;
+            enableRosetta = true;
+            user = username;
+          };
+        }
       ];
     };
 
@@ -76,6 +85,7 @@
 
     homeConfigurations = {
       "wayne@dev" = mkHomeConfiguration "x86_64-linux" "wayne" "dev";
+      "wayne@MacBookAir" = mkHomeConfiguration "aarch64-darwin" "wayne" "MacBookAir";
     };
 
     overlays = import ./overlays { inherit inputs; };

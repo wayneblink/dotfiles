@@ -30,6 +30,7 @@
   ];
 
   home.packages = with pkgs; [
+    coreutils-full
     fzf
     ripgrep
     gcc
@@ -39,11 +40,6 @@
     tree
     mermaid-cli
     fd
-    firefox
-    chromium
-    # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
-    vlc
-    ghostty
     starship
     nodejs
     astro-language-server
@@ -60,7 +56,13 @@
     typescript-language-server
   ]
   ++ lib.optionals stdenv.isDarwin []
-  ++ lib.optionals (!stdenv.isDarwin) [];
+  ++ lib.optionals (!stdenv.isDarwin) [
+    chromium
+    firefox
+    ghostty
+    # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
+    vlc
+  ];
 
   programs = {
     neovim = {
@@ -95,6 +97,7 @@
     ".config/ghostty/config".source = ../../../../ghostty/config;
     ".bashrc".source = ../../../../.bashrc;
     ".bash_profile".source = ../../../../.bash_profile;
+    ".zshrc".source = ../../../../.zshrc;
   };
 
   home.sessionVariables = {
