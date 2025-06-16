@@ -52,9 +52,26 @@
       modules = [ ./home/${username}/${hostname} ];
     };
 
+  mkDarwinConfiguration = hostname: username:
+    darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
+      specialArgs = {
+        inherit inputs outputs hostname;
+        userConfig = users.${username};
+      };
+      modules = [
+        ./hosts/${hostname}
+        home-manager.darwinModules.home-manager
+      ];
+    };
+
   in {
     nixosConfigurations = {
       dev = mkNixosConfiguration "dev" "wayne";
+    };
+
+    darwinConfigurations = {
+      MacBookAir = mkDarwinConfiguration "MacBookAir" "wayne";
     };
 
     homeConfigurations = {

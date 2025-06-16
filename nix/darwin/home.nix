@@ -34,6 +34,7 @@
     basedpyright
     gopls
     rust-analyzer
+    dhall-lsp-server
   ];
 
   programs = {
@@ -56,6 +57,7 @@
   home.file = {
     ".config/nvim".source = ../../nvim;
     ".config/ghostty/config".source = ../../ghostty/config;
+    ".bash_profile".source = ../../.bash_profile;
     ".bashrc".source = ../../.bashrc;
     ".zshrc".source = ../../.zshrc;
   };

@@ -1,11 +1,11 @@
-{ 
+{
   inputs,
   outputs,
-  lib, 
-  config, 
+  lib,
+  config,
   userConfig,
-  pkgs, 
-  ... 
+  pkgs,
+  ...
 }: {
   nixpkgs = {
     overlays = [
@@ -103,6 +103,7 @@
     xclip
     killall
     gnumake
+    wofi
   ];
 
   programs.dconf.enable = true;

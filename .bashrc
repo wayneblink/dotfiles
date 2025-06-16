@@ -6,6 +6,8 @@ fi
 
 set -o vi
 
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 export NIX_PATH=nixpkgs=channel:nixos-25.05:nixos-config=/home/wayne/dotfiles/nix/configuration.nix
 
 # Set up fzf key bindings and fuzzy completion

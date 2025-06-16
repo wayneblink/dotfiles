@@ -46,18 +46,21 @@
     ghostty
     starship
     nodejs
-    prettierd
-    rustfmt
+    astro-language-server
+    basedpyright
+    dhall-lsp-server
+    gopls
     lua-language-server
     luarocks
+    prettierd
+    rust-analyzer
+    rustfmt
     stylua
-    astro-language-server
     typescript
     typescript-language-server
-    basedpyright
-    gopls
-    rust-analyzer
-  ];
+  ]
+  ++ lib.optionals stdenv.isDarwin []
+  ++ lib.optionals (!stdenv.isDarwin) [];
 
   programs = {
     neovim = {
@@ -87,11 +90,11 @@
     };
   };
 
-  # TODO
   home.file = {
     ".config/nvim".source = ../../../../nvim;
     ".config/ghostty/config".source = ../../../../ghostty/config;
     ".bashrc".source = ../../../../.bashrc;
+    ".bash_profile".source = ../../../../.bash_profile;
   };
 
   home.sessionVariables = {
