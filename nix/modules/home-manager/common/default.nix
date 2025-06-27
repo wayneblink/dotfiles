@@ -62,6 +62,7 @@
     ghostty
     # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
     vlc
+    legcord
   ];
 
   programs = {

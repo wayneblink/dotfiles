@@ -104,7 +104,39 @@
     killall
     gnumake
     wofi
+    protonup
   ];
+
+  hardware = {
+    graphics.enable = true;
+    graphics.enable32Bit = true;
+  };
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    # hint Electron apps to use Wayland:
+    NIXOS_OZONE_WL = "1";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/${userConfig.name}/.steam/root/compatibilitytools.d";
+  };
+
+  # List services that you want to enable:
+  services.libinput.enable = true;
+  services.locate.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+
+  environment.localBinInPath = true;
 
   programs.dconf.enable = true;
 
@@ -113,25 +145,9 @@
     xwayland.enable = true;
   };
 
-  hardware = {
-    graphics.enable = true;
-    nvidia.modesetting.enable = true;
-  };
-
-  environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    # hint Electron apps to use Wayland:
-    NIXOS_OZONE_WL = "1";
-  };
-
-  # List services that you want to enable:
-  services.libinput.enable = true;
-  services.locate.enable = true;
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  environment.localBinInPath = true;
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
