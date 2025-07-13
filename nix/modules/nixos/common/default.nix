@@ -100,11 +100,17 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    xclip
-    killall
+    glib
     gnumake
-    wofi
+    killall
+    pavucontrol
     protonup
+    wofi
+    xclip
+  ];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
   ];
 
   hardware = {
@@ -120,6 +126,10 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  programs.steam.enable = true;
+  programs.steam.gamescopeSession.enable = true;
+  programs.gamemode.enable = true;
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
@@ -138,16 +148,12 @@
 
   environment.localBinInPath = true;
 
-  programs.dconf.enable = true;
-
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
 
-  programs.steam.enable = true;
-  programs.steam.gamescopeSession.enable = true;
-  programs.gamemode.enable = true;
+  programs.dconf.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

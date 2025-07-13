@@ -73,6 +73,33 @@
       vimAlias = true;
       vimdiffAlias = true;
     };
+    # TODO break out into module
+    helix = {
+      enable = true;
+      settings = {
+        theme = "tokyonight_transparent";
+        editor = {
+          color-modes = true;
+          cursorline = true;
+          idle-timeout = 10;
+          statusline.mode = {
+            insert = "INSERT";
+            normal = "NORMAL";
+            select = "SELECT";
+          };
+          indent-guides = {
+            character = "|";
+            render = true;
+          };
+        };
+      };
+      themes = {
+        tokyonight_transparent = {
+          "inherits" = "tokyonight";
+          "ui.background" = { };
+        };
+      };
+    };
     direnv = {
       enable = true;
       enableBashIntegration = true;

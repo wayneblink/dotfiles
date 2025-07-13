@@ -14,6 +14,8 @@
       set -g prefix C-Space
       bind Space send-prefix
 
+      set -sg escape-time 0
+
       # Easy config reload
       bind-key R source-file ~/.tmux.conf \; display-message "tmux.conf reloaded."
 
