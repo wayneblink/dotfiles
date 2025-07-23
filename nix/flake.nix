@@ -15,79 +15,86 @@
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    darwin,
-    nix-homebrew,
-    ...
-  }@ inputs: let
-  inherit (self) outputs;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      darwin,
+      nix-homebrew,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
 
-  users = {
-    wayne = {
-      name = "wayne";
-      username = "wayneblink";
-      email = "darylblink@ymail.com";
-    };
-  };
-
-  mkNixosConfiguration = hostname: username:
-    nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        inherit inputs outputs hostname;
-        userConfig = users.${username};
-        nixosModules = "${self}/modules/nixos";
+      users = {
+        wayne = {
+          name = "wayne";
+          username = "wayneblink";
+          email = "darylblink@ymail.com";
+        };
       };
-      modules = [ ./hosts/${hostname} ];
-    };
 
-  mkHomeConfiguration = system: username: hostname:
-    home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { inherit system; };
-      extraSpecialArgs = {
-        inherit inputs outputs;
-        userConfig = users.${username};
-        nhModules = "${self}/modules/home-manager";
-      };
-      modules = [ ./home/${username}/${hostname} ];
-    };
-
-  mkDarwinConfiguration = hostname: username:
-    darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      specialArgs = {
-        inherit inputs outputs hostname;
-        userConfig = users.${username};
-      };
-      modules = [
-        ./hosts/${hostname}
-        home-manager.darwinModules.home-manager
-        nix-homebrew.darwinModules.nix-homebrew {
-          nix-homebrew = {
-            enable = true;
-            enableRosetta = true;
-            user = username;
+      mkNixosConfiguration =
+        hostname: username:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit inputs outputs hostname;
+            userConfig = users.${username};
+            nixosModules = "${self}/modules/nixos";
           };
-        }
-      ];
-    };
+          modules = [ ./hosts/${hostname} ];
+        };
 
-  in {
-    nixosConfigurations = {
-      dev = mkNixosConfiguration "dev" "wayne";
-    };
+      mkHomeConfiguration =
+        system: username: hostname:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs { inherit system; };
+          extraSpecialArgs = {
+            inherit inputs outputs;
+            userConfig = users.${username};
+            nhModules = "${self}/modules/home-manager";
+          };
+          modules = [ ./home/${username}/${hostname} ];
+        };
 
-    darwinConfigurations = {
-      MacBookAir = mkDarwinConfiguration "MacBookAir" "wayne";
-    };
+      mkDarwinConfiguration =
+        hostname: username:
+        darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = {
+            inherit inputs outputs hostname;
+            userConfig = users.${username};
+          };
+          modules = [
+            ./hosts/${hostname}
+            home-manager.darwinModules.home-manager
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                user = username;
+              };
+            }
+          ];
+        };
 
-    homeConfigurations = {
-      "wayne@dev" = mkHomeConfiguration "x86_64-linux" "wayne" "dev";
-      "wayne@MacBookAir" = mkHomeConfiguration "aarch64-darwin" "wayne" "MacBookAir";
-    };
+    in
+    {
+      nixosConfigurations = {
+        dev = mkNixosConfiguration "dev" "wayne";
+      };
 
-    overlays = import ./overlays { inherit inputs; };
-  };
+      darwinConfigurations = {
+        MacBookAir = mkDarwinConfiguration "MacBookAir" "wayne";
+      };
+
+      homeConfigurations = {
+        "wayne@dev" = mkHomeConfiguration "x86_64-linux" "wayne" "dev";
+        "wayne@MacBookAir" = mkHomeConfiguration "aarch64-darwin" "wayne" "MacBookAir";
+      };
+
+      overlays = import ./overlays { inherit inputs; };
+    };
 }

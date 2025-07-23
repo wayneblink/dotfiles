@@ -6,7 +6,8 @@
   userConfig,
   pkgs,
   ...
-}: {
+}:
+{
   nixpkgs = {
     overlays = [
       outputs.overlays.stable-packages
@@ -33,7 +34,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${userConfig.name} = {
     description = userConfig.username;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     isNormalUser = true;
   };
 

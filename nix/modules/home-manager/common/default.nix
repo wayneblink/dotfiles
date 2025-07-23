@@ -3,7 +3,8 @@
   userConfig,
   pkgs,
   ...
-}: {
+}:
+{
   nixpkgs = {
     overlays = [
       outputs.overlays.stable-packages
@@ -19,9 +20,7 @@
   home = {
     username = "${userConfig.name}";
     homeDirectory =
-      if pkgs.stdenv.isDarwin
-      then "/Users/${userConfig.name}"
-      else "/home/${userConfig.name}";
+      if pkgs.stdenv.isDarwin then "/Users/${userConfig.name}" else "/home/${userConfig.name}";
   };
 
   imports = [
@@ -29,41 +28,46 @@
     ./tmux.nix
   ];
 
-  home.packages = with pkgs; [
-    coreutils-full
-    fzf
-    ripgrep
-    gcc
-    htop
-    jq
-    wget
-    tree
-    mermaid-cli
-    fd
-    starship
-    nodejs
-    astro-language-server
-    basedpyright
-    dhall-lsp-server
-    gopls
-    lua-language-server
-    luarocks
-    prettierd
-    rust-analyzer
-    rustfmt
-    stylua
-    typescript
-    typescript-language-server
-  ]
-  ++ lib.optionals stdenv.isDarwin []
-  ++ lib.optionals (!stdenv.isDarwin) [
-    chromium
-    firefox
-    ghostty
-    # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
-    vlc
-    legcord
-  ];
+  home.packages =
+    with pkgs;
+    [
+      coreutils-full
+      fzf
+      ripgrep
+      gcc
+      htop
+      jq
+      lf
+      wget
+      tree
+      mermaid-cli
+      fd
+      starship
+      nodejs
+      astro-language-server
+      basedpyright
+      dhall-lsp-server
+      gopls
+      lua-language-server
+      luarocks
+      nixfmt-rfc-style
+      prettierd
+      rust-analyzer
+      rustfmt
+      stylua
+      typescript
+      typescript-language-server
+    ]
+    ++ lib.optionals stdenv.isDarwin [ ]
+    ++ lib.optionals (!stdenv.isDarwin) [
+      chromium
+      firefox
+      ghostty
+      # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
+      legcord
+      vlc
+      wl-clipboard
+    ];
 
   programs = {
     neovim = {
@@ -93,6 +97,79 @@
           };
         };
       };
+      languages.language = [
+        {
+          name = "nix";
+          auto-format = true;
+          formatter = {
+            command = "nixfmt";
+          };
+        }
+        {
+          name = "javascript";
+          auto-format = true;
+          formatter = {
+            command = "prettierd";
+            args = [ ".js" ];
+          };
+        }
+        {
+          name = "typescript";
+          auto-format = true;
+          formatter = {
+            command = "prettierd";
+            args = [ ".ts" ];
+          };
+        }
+        {
+          name = "jsx";
+          auto-format = true;
+          formatter = {
+            command = "prettierd";
+            args = [ ".jsx" ];
+          };
+        }
+        {
+          name = "tsx";
+          auto-format = true;
+          formatter = {
+            command = "prettierd";
+            args = [ ".tsx" ];
+          };
+        }
+        {
+          name = "json";
+          auto-format = true;
+          formatter = {
+            command = "prettierd";
+            args = [ ".json" ];
+          };
+        }
+        {
+          name = "markdown";
+          auto-format = true;
+          formatter = {
+            command = "prettierd";
+            args = [ ".md" ];
+          };
+        }
+        {
+          name = "html";
+          auto-format = true;
+          formatter = {
+            command = "prettierd";
+            args = [ ".html" ];
+          };
+        }
+        {
+          name = "css";
+          auto-format = true;
+          formatter = {
+            command = "prettierd";
+            args = [ ".css" ];
+          };
+        }
+      ];
       themes = {
         tokyonight_transparent = {
           "inherits" = "tokyonight";

@@ -14,13 +14,27 @@
       rbi = "rebase -i";
     };
     extraConfig = {
-      commit = { verbose = true; };
-      init = { defaultBranch = "main"; };
-      log = { date = "local"; };
-      branch = { sort = "-committerdate"; };
-      rerere = { enabled = true; };
-      help = { autocorrect = "prompt"; };
-      diff = { algorithm = "histogram"; };
+      commit = {
+        verbose = true;
+      };
+      init = {
+        defaultBranch = "main";
+      };
+      log = {
+        date = "local";
+      };
+      branch = {
+        sort = "-committerdate";
+      };
+      rerere = {
+        enabled = true;
+      };
+      help = {
+        autocorrect = "prompt";
+      };
+      diff = {
+        algorithm = "histogram";
+      };
     };
   };
 }

@@ -1,5 +1,4 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-require("config.lazy")
-vim.cmd[[colorscheme tokyonight-night]]
+require("config.options")
+require("core.lazy")
+require("core.lsp")
+require("config.keymaps")

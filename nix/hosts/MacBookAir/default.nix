@@ -3,7 +3,8 @@
   outputs,
   userConfig,
   ...
-}: {
+}:
+{
   nixpkgs = {
     overlays = [
       outputs.overlays.stable-packages

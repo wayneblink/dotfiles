@@ -11,5 +11,5 @@ return {
       -- your configuration comes here
       global_keymaps = true,
     },
-  }
+  },
 }

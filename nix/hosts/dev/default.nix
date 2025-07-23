@@ -3,7 +3,8 @@
   hostname,
   nixosModules,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware.nix
     "${nixosModules}/common"

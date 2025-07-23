@@ -22,12 +22,12 @@ return {
 
       require("mini.bracketed").setup()
 
-      local indentscope = require "mini.indentscope"
-      indentscope.setup {
+      local indentscope = require("mini.indentscope")
+      indentscope.setup({
         draw = {
           animation = indentscope.gen_animation.none(),
         },
-      }
-    end
-  }
+      })
+    end,
+  },
 }

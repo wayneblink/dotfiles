@@ -30,7 +30,7 @@ set.scrolloff = 8
 set.updatetime = 50
 set.swapfile = false
 set.backup = false
-set.undodir = os.getenv "HOME" .. "/.vim/undodir"
+set.undodir = os.getenv("HOME") .. "/.vim/undodir"
 set.undofile = true
 
 -- Don't have `o` add a comment
