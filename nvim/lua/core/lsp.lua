@@ -1,5 +1,6 @@
 vim.lsp.enable({
   "basedpyright",
+  "fennel_ls",
   "gopls",
   "lua_ls",
   "rust_analyzer",

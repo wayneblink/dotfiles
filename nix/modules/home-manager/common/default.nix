@@ -44,9 +44,12 @@
       fd
       starship
       nodejs
+      lua51Packages.fennel
       astro-language-server
       basedpyright
       dhall-lsp-server
+      fnlfmt
+      fennel-ls
       gopls
       lua-language-server
       luarocks

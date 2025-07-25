@@ -10,6 +10,7 @@ return {
         },
       },
       formatters_by_ft = {
+        fennel = { "fnlfmt" },
         go = { "gofmt" },
         javascript = { "prettierd", "prettier" },
         javascriptreact = { "prettierd", "prettier" },
