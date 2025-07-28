@@ -15,6 +15,7 @@ return {
         javascript = { "prettierd", "prettier" },
         javascriptreact = { "prettierd", "prettier" },
         lua = { "stylua" },
+        nix = { "nixfmt" },
         python = { "isort", "black" },
         rust = { "rustfmt" },
         typescript = { "prettierd", "prettier" },

@@ -24,7 +24,12 @@
   };
 
   imports = [
+    ./direnv.nix
     ./git.nix
+    ./helix.nix
+    ./jujutsu.nix
+    ./neovim.nix
+    ./starship.nix
     ./tmux.nix
   ];
 
@@ -68,137 +73,10 @@
       ghostty
       # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
       legcord
+      mitscheme
       vlc
       wl-clipboard
     ];
-
-  programs = {
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-    };
-    # TODO break out into module
-    helix = {
-      enable = true;
-      settings = {
-        theme = "tokyonight_transparent";
-        editor = {
-          color-modes = true;
-          cursorline = true;
-          idle-timeout = 10;
-          statusline.mode = {
-            insert = "INSERT";
-            normal = "NORMAL";
-            select = "SELECT";
-          };
-          indent-guides = {
-            character = "|";
-            render = true;
-          };
-        };
-      };
-      languages.language = [
-        {
-          name = "nix";
-          auto-format = true;
-          formatter = {
-            command = "nixfmt";
-          };
-        }
-        {
-          name = "javascript";
-          auto-format = true;
-          formatter = {
-            command = "prettierd";
-            args = [ ".js" ];
-          };
-        }
-        {
-          name = "typescript";
-          auto-format = true;
-          formatter = {
-            command = "prettierd";
-            args = [ ".ts" ];
-          };
-        }
-        {
-          name = "jsx";
-          auto-format = true;
-          formatter = {
-            command = "prettierd";
-            args = [ ".jsx" ];
-          };
-        }
-        {
-          name = "tsx";
-          auto-format = true;
-          formatter = {
-            command = "prettierd";
-            args = [ ".tsx" ];
-          };
-        }
-        {
-          name = "json";
-          auto-format = true;
-          formatter = {
-            command = "prettierd";
-            args = [ ".json" ];
-          };
-        }
-        {
-          name = "markdown";
-          auto-format = true;
-          formatter = {
-            command = "prettierd";
-            args = [ ".md" ];
-          };
-        }
-        {
-          name = "html";
-          auto-format = true;
-          formatter = {
-            command = "prettierd";
-            args = [ ".html" ];
-          };
-        }
-        {
-          name = "css";
-          auto-format = true;
-          formatter = {
-            command = "prettierd";
-            args = [ ".css" ];
-          };
-        }
-      ];
-      themes = {
-        tokyonight_transparent = {
-          "inherits" = "tokyonight";
-          "ui.background" = { };
-        };
-      };
-    };
-    direnv = {
-      enable = true;
-      enableBashIntegration = true;
-      nix-direnv.enable = true;
-    };
-    jujutsu = {
-      enable = true;
-      settings = {
-        user.name = "${userConfig.username}";
-        user.email = "${userConfig.email}";
-      };
-    };
-    starship = {
-      enable = true;
-      settings = {
-        add_newline = false;
-      };
-    };
-  };
 
   home.file = {
     ".config/nvim".source = ../../../../nvim;
