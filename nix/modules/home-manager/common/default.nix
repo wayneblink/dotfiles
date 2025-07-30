@@ -47,6 +47,7 @@
       tree
       mermaid-cli
       fd
+      kitty
       starship
       nodejs
       lua51Packages.fennel

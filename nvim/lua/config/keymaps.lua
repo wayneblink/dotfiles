@@ -12,7 +12,7 @@ set("n", "<M-s>", "<C-W>-")
 
 set("n", "-", "<cmd>Oil<CR>")
 
-set("t", "<esc><esc>", "<c-\\><c-n>")
+set("t", "<leader><esc>", "<c-\\><c-n>")
 
 -- Testing
 set("n", "<leader><leader>x", "<cmd>source %<CR>")
