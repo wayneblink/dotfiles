@@ -2,12 +2,20 @@
   "contributes": {
     "snippets": [
       {
+        "language": "go",
+        "path": "./go.json"
+      },
+      {
         "language": "javascript",
         "path": "./javascript.json"
       },
       {
         "language": "javascriptreact",
         "path": "./javascript.json"
+      },
+      {
+        "language": "python",
+        "path": "./python.json"
       },
       {
         "language": "typescript",

@@ -47,12 +47,12 @@
       tree
       mermaid-cli
       fd
-      kitty
       starship
       nodejs
       lua51Packages.fennel
       astro-language-server
       basedpyright
+      black
       dhall-lsp-server
       fnlfmt
       fennel-ls
@@ -61,6 +61,7 @@
       luarocks
       nixfmt-rfc-style
       prettierd
+      ruff
       rust-analyzer
       rustfmt
       stylua
@@ -70,9 +71,10 @@
     ++ lib.optionals stdenv.isDarwin [ ]
     ++ lib.optionals (!stdenv.isDarwin) [
       chromium
+      # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
       firefox
       ghostty
-      # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
+      kitty
       legcord
       mitscheme
       vlc
@@ -80,10 +82,11 @@
     ];
 
   home.file = {
-    ".config/nvim".source = ../../../../nvim;
-    ".config/ghostty/config".source = ../../../../ghostty/config;
     ".bashrc".source = ../../../../.bashrc;
     ".bash_profile".source = ../../../../.bash_profile;
+    ".config/ghostty/config".source = ../../../../ghostty/config;
+    ".config/nvim".source = ../../../../nvim;
+    ".config/kitty/kitty.conf".source = ../../../../kitty.conf;
     ".zshrc".source = ../../../../.zshrc;
   };
 

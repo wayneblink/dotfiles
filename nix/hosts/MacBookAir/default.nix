@@ -61,6 +61,7 @@
       "chromium"
       "firefox"
       "ghostty"
+      "kitty"
       "legcord"
       "rectangle"
       "vlc"
