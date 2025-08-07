@@ -1,4 +1,5 @@
 {
+  config,
   outputs,
   userConfig,
   pkgs,
@@ -45,9 +46,10 @@
       lf
       wget
       tree
-      mermaid-cli
       fd
       starship
+      kubectl
+      mermaid-cli
       nodejs
       lua51Packages.fennel
       astro-language-server
@@ -85,9 +87,10 @@
     ".bashrc".source = ../../../../.bashrc;
     ".bash_profile".source = ../../../../.bash_profile;
     ".config/ghostty/config".source = ../../../../ghostty/config;
-    ".config/nvim".source = ../../../../nvim;
     ".config/kitty/kitty.conf".source = ../../../../kitty.conf;
     ".zshrc".source = ../../../../.zshrc;
+    ".config/nvim".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
   };
 
   home.sessionVariables = {

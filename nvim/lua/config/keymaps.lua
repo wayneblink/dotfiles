@@ -10,8 +10,6 @@ set("n", "<M-.>", "<c-w>5>")
 set("n", "<M-t>", "<C-W>+")
 set("n", "<M-s>", "<C-W>-")
 
-set("n", "-", "<cmd>Oil<CR>")
-
 set("t", "<leader><esc>", "<c-\\><c-n>")
 
 -- Testing

@@ -37,6 +37,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "docker"
     ];
     isNormalUser = true;
   };
@@ -83,6 +84,7 @@
     enable = true;
     xkb.layout = "us";
     xkb.variant = "";
+    xkbOptions = "ctrl:nocaps";
   };
 
   services.displayManager.gdm.enable = true;
@@ -158,6 +160,8 @@
   };
 
   programs.dconf.enable = true;
+
+  virtualisation.docker.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

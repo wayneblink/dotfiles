@@ -8,6 +8,8 @@ return {
         ensure_installed = {
           "c",
           "fennel",
+          "go",
+          "javascript",
           "lua",
           "vim",
           "vimdoc",
@@ -16,6 +18,7 @@ return {
           "markdown_inline",
           "scheme",
           "sql",
+          "typescript",
         },
         auto_install = false,
         highlight = {
