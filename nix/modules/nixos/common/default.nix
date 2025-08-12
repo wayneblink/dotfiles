@@ -163,6 +163,11 @@
 
   virtualisation.docker.enable = true;
 
+  services.mysql = {
+    enable = true;
+    package = pkgs.mysql84;
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

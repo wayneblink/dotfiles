@@ -3,6 +3,7 @@ vim.lsp.enable({
   "fennel_ls",
   "gopls",
   "lua_ls",
+  "nixd",
   "rust_analyzer",
   "sqls",
   "ts_ls",

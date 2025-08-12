@@ -1,0 +1,17 @@
+{
+  "nix shell": {
+    "prefix": "nix",
+    "body": [
+      "{",
+      "\tpkgs ? import <nixpkgs> { },",
+      "}:",
+      "pkgs.mkShell {",
+      "\tname = \"${1:dev-shell}\";\n",
+      "\tnativeBuildInputs = with pkgs; [",
+      "\t\t$0",
+      "\t];",
+      "}"
+    ],
+    "description": "nix dev shell"
+  }
+}

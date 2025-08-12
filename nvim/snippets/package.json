@@ -2,6 +2,14 @@
   "contributes": {
     "snippets": [
       {
+        "language": "template",
+        "path": "./html.json"
+      },
+      {
+        "language": "html",
+        "path": "./html.json"
+      },
+      {
         "language": "go",
         "path": "./go.json"
       },
@@ -12,6 +20,10 @@
       {
         "language": "javascriptreact",
         "path": "./javascript.json"
+      },
+      {
+        "language": "nix",
+        "path": "./nix.json"
       },
       {
         "language": "python",

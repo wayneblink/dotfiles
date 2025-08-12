@@ -61,6 +61,7 @@
       gopls
       lua-language-server
       luarocks
+      nixd
       nixfmt-rfc-style
       prettierd
       ruff
@@ -91,6 +92,7 @@
     ".zshrc".source = ../../../../.zshrc;
     ".config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
+    ".config/hypr/hyprland.conf".source = ../../../../hypr/hyprland.conf;
   };
 
   home.sessionVariables = {
