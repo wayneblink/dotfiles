@@ -64,9 +64,11 @@
       nixd
       nixfmt-rfc-style
       prettierd
+      roslyn-ls
       ruff
       rust-analyzer
       rustfmt
+      rzls
       stylua
       typescript
       typescript-language-server

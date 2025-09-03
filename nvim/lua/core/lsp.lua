@@ -4,6 +4,7 @@ vim.lsp.enable({
   "gopls",
   "lua_ls",
   "nixd",
+  "ruby_lsp",
   "rust_analyzer",
   "sqls",
   "ts_ls",
