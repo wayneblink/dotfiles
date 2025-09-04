@@ -72,6 +72,7 @@
       stylua
       typescript
       typescript-language-server
+      zls
     ]
     ++ lib.optionals stdenv.isDarwin [ ]
     ++ lib.optionals (!stdenv.isDarwin) [

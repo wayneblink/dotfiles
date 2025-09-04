@@ -8,6 +8,7 @@ vim.lsp.enable({
   "rust_analyzer",
   "sqls",
   "ts_ls",
+  "zls",
 })
 
 vim.cmd("set completeopt+=noselect")
