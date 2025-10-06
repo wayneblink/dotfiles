@@ -72,6 +72,8 @@
       stylua
       typescript
       typescript-language-server
+      vtsls
+      vue-language-server
       zls
     ]
     ++ lib.optionals stdenv.isDarwin [ ]

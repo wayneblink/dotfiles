@@ -1,4 +1,4 @@
-theme = tokyonight_night
+theme = TokyoNight Night
 font-family = "JetBrainsMono Nerd Font"
 font-feature = -calt, -liga, -dlig
 font-size = 16

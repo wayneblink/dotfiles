@@ -7,7 +7,7 @@ vim.lsp.enable({
   "ruby_lsp",
   "rust_analyzer",
   "sqls",
-  "ts_ls",
+  "vtsls",
   "zls",
 })
 
