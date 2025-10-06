@@ -1,8 +1,5 @@
 local set = vim.keymap.set
 
--- TODO: set in ideavimrc
--- use defaults grn, gra, grr, gri, gO, ctrl-s, gf
--- https://neovim.io/doc/user/lsp.html
 set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
 
 -- These mappings control the size of splits (height/width)

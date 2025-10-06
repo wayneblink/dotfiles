@@ -2,17 +2,18 @@ let mapleader=" "
 
 """ list of intellij actions https://gist.github.com/zchee/9c78f91cc5ad771c1f5d
 """ :actionlist <search-term>
-map <leader>fg <Action>(FindInPath)
-map <leader>fd <Action>(GotoFile)
-map <leader>rn <Action>(RenameElement)
+map <leader>f/ <Action>(FindInPath)
+map <leader>ff <Action>(GotoFile)
+map <leader>grn <Action>(RenameElement)
 map <C-i> <Action>(Forward)
 map <C-o> <Action>(Back)
-map <C-e> <Action>(RecentFiles)
-map gr <Action>(ShowUsages)
+map <leader>e <Action>(RecentFiles)
+map gra <Action>(ShowIntentionActions)
+map grr <Action>(ShowUsages)
 map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
 map <leader>vd <Action>(ShowErrorDescription)
-imap <C-h> <Action>(ParameterInfo)
+imap <C-s> <Action>(ParameterInfo)
 imap <C-y> <Action>(EditorChooseLookupItemReplace)
 
 nmap <leader>tt <Action>(ActivateTerminalToolWindow)
@@ -33,7 +34,7 @@ nmap <leader>rs <Action>(Stop)
 
 """ goto
 nmap ga <Action>(GotoAction)
-nmap gf <Action>(GotoFile)
+nmap gff <Action>(GotoFile)
 nmap gs <Action>(GotoSymbol)
 nmap gt <Action>(GotoTest)
 nmap gT <Action>(TextSearchAction)
@@ -59,8 +60,7 @@ set NERDTree
 
 """ NERDTree
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 nnoremap <S-TAB> :action PreviousTab<CR>
@@ -74,6 +74,12 @@ nmap <leader>6 <Action>(GoToTab6)
 nmap <leader>7 <Action>(GoToTab7)
 nmap <leader>8 <Action>(GoToTab8)
 nmap <leader>9 <Action>(GoToTab9)
+
+inoremap <C-n> <Down>
+inoremap <C-p> <Up>
+
+inoremap <C-n> <Action>(EditorDown)
+inoremap <C-p> <Action>(EditorUp)
 
 set inccommand="split"
 set smartcase=true

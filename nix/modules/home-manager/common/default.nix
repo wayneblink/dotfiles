@@ -82,6 +82,7 @@
       # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
       firefox
       ghostty
+      jetbrains.idea-community-bin
       kitty
       legcord
       mitscheme
@@ -98,6 +99,7 @@
     ".config/nvim".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/hypr/hyprland.conf".source = ../../../../hypr/hyprland.conf;
+    ".ideavimrc".source = ../../../../.ideavimrc;
   };
 
   home.sessionVariables = {
