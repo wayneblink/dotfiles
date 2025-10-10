@@ -100,6 +100,8 @@
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/nvim";
     ".config/hypr/hyprland.conf".source = ../../../../hypr/hyprland.conf;
     ".ideavimrc".source = ../../../../.ideavimrc;
+    ".config/waybar/config.jsonc".source = ../../../../waybar/config.jsonc;
+    ".config/waybar/style.css".source = ../../../../waybar/style.css;
   };
 
   home.sessionVariables = {
