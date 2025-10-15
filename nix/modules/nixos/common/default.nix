@@ -51,14 +51,22 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "dev"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.iwd.enable = true; # Enables wireless support via wpa_supplicant.
+  networking.wireless.iwd.settings = {
+    Network = {
+      EnableIPv6 = true;
+    };
+    Settings = {
+      AutoConnect = true;
+    };
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = false;
 
   systemd.services = {
     NetworkManager-wait-online.enable = false;
@@ -66,7 +74,7 @@
   };
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Chicago";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -112,6 +120,7 @@
   environment.systemPackages = with pkgs; [
     glib
     gnumake
+    impala
     killall
     pavucontrol
     protonup
