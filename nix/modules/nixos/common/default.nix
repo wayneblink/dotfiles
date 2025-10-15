@@ -125,6 +125,7 @@
     pavucontrol
     protonup
     waybar
+    wiremix
     wofi
     xclip
   ];
