@@ -7,7 +7,7 @@ sudo nixos-rebuild switch --flake .#{machine}
 
 nix-darwin:
 ```
-darwin-rebuild switch --flake .#{machine}
+sudo darwin-rebuild switch --flake .#{machine}
 ```
 
 home-manager:

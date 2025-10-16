@@ -63,6 +63,7 @@
       "ghostty"
       "kitty"
       "legcord"
+      "raycast"
       "rectangle"
       "vlc"
     ];

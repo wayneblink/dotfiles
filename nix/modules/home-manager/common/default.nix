@@ -88,6 +88,7 @@
       mitscheme
       vlc
       wl-clipboard
+      zeal
     ];
 
   home.file = {
