@@ -52,6 +52,7 @@
       mermaid-cli
       nodejs
       lua51Packages.fennel
+      angular-language-server
       astro-language-server
       basedpyright
       black

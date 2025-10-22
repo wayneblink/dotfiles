@@ -42,6 +42,7 @@
       finder.FXPreferredViewStyle = "clmv";
       loginwindow.GuestEnabled = false;
       NSGlobalDomain = {
+        _HIHideMenuBar = true;
         AppleInterfaceStyle = "Dark";
         ApplePressAndHoldEnabled = false;
         KeyRepeat = 2;
@@ -57,14 +58,16 @@
 
   homebrew = {
     enable = true;
+    brews = with pkgs; [
+      "koekeishiya/formulae/yabai"
+      "skhd-zig"
+    ];
     casks = with pkgs; [
       "chromium"
       "firefox"
       "ghostty"
       "kitty"
       "legcord"
-      "raycast"
-      "rectangle"
       "vlc"
     ];
   };

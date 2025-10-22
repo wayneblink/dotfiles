@@ -1,5 +1,7 @@
 vim.lsp.enable({
+  "angularls",
   "basedpyright",
+  "clangd",
   "fennel_ls",
   "gopls",
   "lua_ls",
