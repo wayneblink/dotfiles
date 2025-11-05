@@ -1,0 +1,88 @@
+{
+  "breadcrumbs.enabled": false,
+  "editor.cursorBlinking": "solid",
+  "editor.fontFamily": "JetBrains Mono NL",
+  "editor.fontSize": 16,
+  "editor.fontLigatures": false,
+  "editor.formatOnSave": true,
+  "editor.lineNumbers": "relative",
+  "editor.minimap.enabled": false,
+  "editor.smoothScrolling": false,
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "vim.leader": "<space>",
+  "vim.useCtrlKeys": true,
+  "vim.highlightedyank.enable": true,
+  "vim.highlightedyank.duration": 100,
+  "vim.hlsearch": false,
+  "vim.incsearch": true,
+  "vim.ignorecase": true,
+  "vim.smartcase": true,
+  "vim.useSystemClipboard": true,
+  "vim.easyMotion": true,
+  "vim.surround": true,
+  "window.zoomLevel": 0.5,
+  "window.titleBarStyle": "custom",
+  "window.menuBarVisibility": "toggle",
+  "workbench.activityBar.location": "top",
+  "workbench.list.smoothScrolling": false,
+  "workbench.reduceMotion": "on",
+  "workbench.sideBar.location": "right",
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showHover"]
+    },
+    {
+      "before": ["g", "f", "f"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["g", "f", "/"],
+      "commands": ["workbench.action.findInFiles"]
+    },
+    {
+      "before": ["g", "r", "n"],
+      "commands": ["editor.action.rename"]
+    },
+    {
+      "before": ["g", "r", "r"],
+      "commands": ["editor.action.referenceSearch.trigger"]
+    },
+    {
+      "before": ["g", "r", "a"],
+      "commands": ["editor.action.codeAction"]
+    },
+    {
+      "before": ["[", "d"],
+      "commands": ["editor.action.marker.prev", "closeMarkersNavigation"]
+    },
+    {
+      "before": ["]", "d"],
+      "commands": ["editor.action.marker.next", "closeMarkersNavigation"]
+    },
+    {
+      "before": ["<leader>", "d"],
+      "commands": ["workbench.actions.view.problems"]
+    },
+    {
+      "before": ["<leader>", "e"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    },
+    {
+      "before": ["<C-h>"],
+      "commands": ["workbench.action.previousEditor"]
+    },
+    {
+      "before": ["<C-l>"],
+      "commands": ["workbench.action.nextEditor"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["g", "r", "a"],
+      "commands": ["editor.action.codeAction"]
+    }
+  ]
+}
