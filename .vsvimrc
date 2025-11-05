@@ -1,0 +1,29 @@
+nnoremap <c-d> <PageDown>
+nnoremap <c-u> <PageUp>
+nnoremap <c-o> :vsc View.NavigateBackward<cr>
+nnoremap <c-i> :vsc View.NavigateForward<cr>
+
+nnoremap gff :vsc Edit.GoToFile<cr>
+nnoremap gf/ :vsc Edit.FindInFiles<cr>
+nnoremap gr :vsc Edit.FindReferences<cr>
+nnoremap grn :vsc Refactor.Rename<cr>
+nnoremap gra :vsc EditorContextMenu.CodeWindow.QuickActionsForPosition<cr>
+nnoremap gcc V:vsc Edit.CommentSelection<cr>
+
+nnoremap [d :vsc View.NextError<cr>
+nnoremap ]d :vsc View.PreviousError<cr>
+
+nnoremap K :vsc Edit.QuickInfo<cr>
+
+set backspace=indent,eol,start
+set ignorecase
+set smartcase
+
+set hlsearch=false
+set nu
+set rnu
+set expandtab
+set wrap=false
+set scrolloff=8
+set clipboard=unnamedplus
+set visualbell
