@@ -3,6 +3,7 @@ font-family = "JetBrainsMono Nerd Font"
 font-feature = -calt, -liga, -dlig
 font-size = 16
 window-inherit-font-size = true
+macos-titlebar-style = tabs
 
 cursor-style = block
 cursor-style-blink = false
