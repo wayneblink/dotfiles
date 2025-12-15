@@ -59,7 +59,6 @@
   homebrew = {
     enable = true;
     brews = with pkgs; [
-      "koekeishiya/formulae/yabai"
       "skhd-zig"
     ];
     casks = with pkgs; [
@@ -69,6 +68,7 @@
       "kitty"
       "legcord"
       "vlc"
+      "nikitabobko/tap/aerospace"
     ];
   };
 
