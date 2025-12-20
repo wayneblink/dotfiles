@@ -91,6 +91,7 @@
       vlc
       vscode
       wl-clipboard
+      xfce.thunar
       zeal
     ];
 
