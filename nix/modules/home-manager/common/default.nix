@@ -79,15 +79,17 @@
     ]
     ++ lib.optionals stdenv.isDarwin [ ]
     ++ lib.optionals (!stdenv.isDarwin) [
-      chromium
       # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
       firefox
       ghostty
       jetbrains.idea-community-bin
+      keyd
       kitty
       legcord
       mitscheme
+      ungoogled-chromium
       vlc
+      vscode
       wl-clipboard
       zeal
     ];

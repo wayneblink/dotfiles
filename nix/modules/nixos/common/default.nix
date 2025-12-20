@@ -101,6 +101,20 @@
 
   services.displayManager.gdm.enable = true;
 
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = [ "*" ];
+        settings = {
+          main = {
+            pagedown = "layer(alt)";
+          };
+        };
+      };
+    };
+  };
+
   # Disable CUPS to print documents.
   services.printing.enable = false;
 
