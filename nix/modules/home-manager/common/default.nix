@@ -93,6 +93,7 @@
     ];
 
   home.file = {
+    ".aerospace.toml".source = ../../../../.aerospace.toml;
     ".bashrc".source = ../../../../.bashrc;
     ".bash_profile".source = ../../../../.bash_profile;
     ".config/ghostty/config".source = ../../../../ghostty/config;
