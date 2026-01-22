@@ -2,6 +2,7 @@
 {
   programs.git = {
     enable = true;
+    delta.enable = true;
     userName = "wayneblink";
     userEmail = "darylblink@ymail.com";
     aliases = {

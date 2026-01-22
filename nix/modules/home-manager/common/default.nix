@@ -3,6 +3,7 @@
   outputs,
   userConfig,
   pkgs,
+  isWSL,
   ...
 }:
 {
@@ -51,6 +52,7 @@
       kubectl
       mermaid-cli
       nodejs
+      dotnetCorePackages.sdk_10_0-bin
       lua51Packages.fennel
       angular-language-server
       astro-language-server
@@ -65,11 +67,10 @@
       nixd
       nixfmt-rfc-style
       prettierd
-      roslyn-ls
+      # roslyn-ls
       ruff
       rust-analyzer
       rustfmt
-      rzls
       stylua
       typescript
       typescript-language-server
@@ -78,7 +79,7 @@
       zls
     ]
     ++ lib.optionals stdenv.isDarwin [ ]
-    ++ lib.optionals (!stdenv.isDarwin) [
+    ++ lib.optionals (!stdenv.isDarwin && !isWSL) [
       # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
       firefox
       ghostty

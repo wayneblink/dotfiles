@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -33,25 +38,40 @@
           username = "wayneblink";
           email = "darylblink@ymail.com";
         };
+        dblink = {
+          name = "dblink";
+          username = "wayneblink";
+          email = "darylblink@ymail.com";
+        };
       };
 
       mkNixosConfiguration =
-        hostname: username:
+        hostname: username: isWSL:
         nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs outputs hostname;
+            inherit
+              inputs
+              outputs
+              hostname
+              isWSL
+              ;
             userConfig = users.${username};
             nixosModules = "${self}/modules/nixos";
           };
-          modules = [ ./hosts/${hostname} ];
+          modules = [
+            ./hosts/${hostname}
+          ]
+          ++ nixpkgs.lib.optionals isWSL [
+            inputs.nixos-wsl.nixosModules.wsl
+          ];
         };
 
       mkHomeConfiguration =
-        system: username: hostname:
+        system: username: hostname: isWSL:
         home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs { inherit system; };
           extraSpecialArgs = {
-            inherit inputs outputs;
+            inherit inputs outputs isWSL;
             userConfig = users.${username};
             nhModules = "${self}/modules/home-manager";
           };
@@ -64,6 +84,7 @@
           system = "aarch64-darwin";
           specialArgs = {
             inherit inputs outputs hostname;
+            isWSL = false;
             userConfig = users.${username};
           };
           modules = [
@@ -83,7 +104,8 @@
     in
     {
       nixosConfigurations = {
-        dev = mkNixosConfiguration "dev" "wayne";
+        dev = mkNixosConfiguration "dev" "wayne" false;
+        wsl = mkNixosConfiguration "wsl" "dblink" true;
       };
 
       darwinConfigurations = {
@@ -91,8 +113,9 @@
       };
 
       homeConfigurations = {
-        "wayne@dev" = mkHomeConfiguration "x86_64-linux" "wayne" "dev";
-        "wayne@MacBookAir" = mkHomeConfiguration "aarch64-darwin" "wayne" "MacBookAir";
+        "wayne@dev" = mkHomeConfiguration "x86_64-linux" "wayne" "dev" false;
+        "dblink@wsl" = mkHomeConfiguration "x86_64-linux" "dblink" "wsl" true;
+        "wayne@MacBookAir" = mkHomeConfiguration "aarch64-darwin" "wayne" "MacBookAir" false;
       };
 
       overlays = import ./overlays { inherit inputs; };
