@@ -2,19 +2,20 @@
 {
   programs.git = {
     enable = true;
-    delta.enable = true;
-    userName = "wayneblink";
-    userEmail = "darylblink@ymail.com";
-    aliases = {
-      ci = "commit";
-      cia = "commit --amend";
-      s = "status";
-      st = "status";
-      pu = "push";
-      rb = "rebase";
-      rbi = "rebase -i";
-    };
-    extraConfig = {
+    settings = {
+      user = {
+        name = "wayneblink";
+        email = "darylblink@ymail.com";
+      };
+      alias = {
+        ci = "commit";
+        cia = "commit --amend";
+        s = "status";
+        st = "status";
+        pu = "push";
+        rb = "rebase";
+        rbi = "rebase -i";
+      };
       commit = {
         verbose = true;
       };
@@ -37,5 +38,9 @@
         algorithm = "histogram";
       };
     };
+  };
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 }

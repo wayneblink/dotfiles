@@ -67,7 +67,7 @@
       lua-language-server
       luarocks
       nixd
-      nixfmt-rfc-style
+      nixfmt
       prettierd
       # roslyn-ls
       ruby-lsp
@@ -81,7 +81,7 @@
       vtsls
       vue-language-server
       zls
-      inputs.opencode.packages.${pkgs.system}.default
+      inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
     ++ lib.optionals stdenv.isDarwin [ ]
     ++ lib.optionals (!stdenv.isDarwin && !isWSL) [
@@ -114,6 +114,7 @@
     ".ideavimrc".source = ../../../../.ideavimrc;
     ".config/waybar/config.jsonc".source = ../../../../waybar/config.jsonc;
     ".config/waybar/style.css".source = ../../../../waybar/style.css;
+    ".wezterm.lua".source = ../../../../.wezterm.lua;
   };
 
   home.sessionVariables = {
