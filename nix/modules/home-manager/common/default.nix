@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   outputs,
   userConfig,
   pkgs,
@@ -38,6 +39,7 @@
   home.packages =
     with pkgs;
     [
+      clang-tools
       coreutils-full
       fzf
       ripgrep
@@ -68,15 +70,18 @@
       nixfmt-rfc-style
       prettierd
       # roslyn-ls
+      ruby-lsp
       ruff
       rust-analyzer
       rustfmt
+      sqls
       stylua
       typescript
       typescript-language-server
       vtsls
       vue-language-server
       zls
+      inputs.opencode.packages.${pkgs.system}.default
     ]
     ++ lib.optionals stdenv.isDarwin [ ]
     ++ lib.optionals (!stdenv.isDarwin && !isWSL) [

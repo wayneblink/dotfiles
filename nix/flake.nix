@@ -18,6 +18,8 @@
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    opencode.url = "github:anomalyco/opencode";
   };
 
   outputs =
