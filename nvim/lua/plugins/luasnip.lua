@@ -1,6 +1,8 @@
 return {
   "L3MON4D3/LuaSnip",
-  dependencies = "mlaursen/vim-react-snippets",
+  dependencies = {
+    { "mlaursen/vim-react-snippets", opts = {} },
+  },
   keys = {
     {
       "<C-r>s",
@@ -44,6 +46,5 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load({
       paths = vim.fn.stdpath("config") .. "/snippets",
     })
-    require("vim-react-snippets").lazy_load()
   end,
 }

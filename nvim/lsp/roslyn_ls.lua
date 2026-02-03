@@ -7,6 +7,7 @@
 -- replace `<platform>` with one of the following `linux-x64`, `osx-x64`, `win-x64`, `neutral` (for more info on the download location see https://github.com/dotnet/roslyn/issues/71474#issuecomment-2177303207).
 -- Download and extract it (nuget's are zip files).
 -- - if you chose `neutral` nuget version, then you have to change the `cmd` like so:
+--   ```lua
 --   cmd = {
 --     'dotnet',
 --     '<my_folder>/Microsoft.CodeAnalysis.LanguageServer.dll',
@@ -16,16 +17,19 @@
 --     fs.joinpath(uv.os_tmpdir(), 'roslyn_ls/logs'),
 --     '--stdio',
 --   },
+--   ```
 --   where `<my_folder>` has to be the folder you extracted the nuget package to.
 -- - for all other platforms put the extracted folder to neovim's PATH (`vim.env.PATH`)
 
 local uv = vim.uv
 local fs = vim.fs
 
+local group = vim.api.nvim_create_augroup("lspconfig.roslyn_ls", { clear = true })
+
 ---@param client vim.lsp.Client
 ---@param target string
 local function on_init_sln(client, target)
-  vim.notify("Initializing: " .. target, vim.log.levels.INFO, { title = "roslyn_ls" })
+  vim.notify("Initializing: " .. target, vim.log.levels.TRACE, { title = "roslyn_ls" })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:notify("solution/open", {
     solution = vim.uri_from_fname(target),
@@ -35,7 +39,7 @@ end
 ---@param client vim.lsp.Client
 ---@param project_files string[]
 local function on_init_project(client, project_files)
-  vim.notify("Initializing: projects", vim.log.levels.INFO, { title = "roslyn_ls" })
+  vim.notify("Initializing: projects", vim.log.levels.TRACE, { title = "roslyn_ls" })
   ---@diagnostic disable-next-line: param-type-mismatch
   client:notify("project/open", {
     projects = vim.tbl_map(function(file)
@@ -44,23 +48,26 @@ local function on_init_project(client, project_files)
   })
 end
 
+---@param client vim.lsp.Client
+local function refresh_diagnostics(client)
+  for buf, _ in pairs(vim.lsp.get_client_by_id(client.id).attached_buffers) do
+    if vim.api.nvim_buf_is_loaded(buf) then
+      client:request(
+        vim.lsp.protocol.Methods.textDocument_diagnostic,
+        { textDocument = vim.lsp.util.make_text_document_params(buf) },
+        nil,
+        buf
+      )
+    end
+  end
+end
+
 local function roslyn_handlers()
   return {
     ["workspace/projectInitializationComplete"] = function(_, _, ctx)
       vim.notify("Roslyn project initialization complete", vim.log.levels.INFO, { title = "roslyn_ls" })
-
-      local buffers = vim.lsp.get_buffers_by_client_id(ctx.client_id)
       local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
-      for _, buf in ipairs(buffers) do
-        client:request(vim.lsp.protocol.Methods.textDocument_diagnostic, {
-          textDocument = vim.lsp.util.make_text_document_params(buf),
-        }, nil, buf)
-      end
-    end,
-    ["workspace/_roslyn_projectHasUnresolvedDependencies"] = function()
-      vim.notify("Detected missing dependencies. Run `dotnet restore` command.", vim.log.levels.ERROR, {
-        title = "roslyn_ls",
-      })
+      refresh_diagnostics(client)
       return vim.NIL
     end,
     ["workspace/_roslyn_projectNeedsRestore"] = function(_, result, ctx)
@@ -91,6 +98,16 @@ local function roslyn_handlers()
   }
 end
 
+---@param bufname string
+---@return boolean
+local function is_decompiled(bufname)
+  local _, endpos = bufname:find("[/\\]MetadataAsSource[/\\]")
+  if endpos == nil then
+    return false
+  end
+  return vim.fn.finddir(bufname:sub(1, endpos), uv.os_tmpdir()) ~= ""
+end
+
 ---@type vim.lsp.Config
 return {
   name = "roslyn_ls",
@@ -105,11 +122,38 @@ return {
   },
   filetypes = { "cs" },
   handlers = roslyn_handlers(),
+
+  commands = {
+    ["roslyn.client.completionComplexEdit"] = function(command, ctx)
+      local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+      local args = command.arguments or {}
+      local uri, edit = args[1], args[2]
+
+      ---@diagnostic disable: undefined-field
+      if uri and edit and edit.newText and edit.range then
+        local workspace_edit = {
+          changes = {
+            [uri.uri] = {
+              {
+                range = edit.range,
+                newText = edit.newText,
+              },
+            },
+          },
+        }
+        vim.lsp.util.apply_workspace_edit(workspace_edit, client.offset_encoding)
+      ---@diagnostic enable: undefined-field
+      else
+        vim.notify("roslyn_ls: completionComplexEdit args not understood: " .. vim.inspect(args), vim.log.levels.WARN)
+      end
+    end,
+  },
+
   root_dir = function(bufnr, cb)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     -- don't try to find sln or csproj for files from libraries
     -- outside of the project
-    if not bufname:match("^" .. fs.joinpath("/tmp/MetadataAsSource/")) then
+    if not is_decompiled(bufname) then
       -- try find solutions root first
       local root_dir = fs.root(bufnr, function(fname, _)
         return fname:match("%.sln[x]?$") ~= nil
@@ -124,6 +168,16 @@ return {
 
       if root_dir then
         cb(root_dir)
+      end
+    else
+      -- Decompiled code (example: "/tmp/MetadataAsSource/f2bfba/DecompilationMetadataAsSourceFileProvider/d5782a/Console.cs")
+      local prev_buf = vim.fn.bufnr("#")
+      local client = vim.lsp.get_clients({
+        name = "roslyn_ls",
+        bufnr = prev_buf ~= 1 and prev_buf or nil,
+      })[1]
+      if client then
+        cb(client.config.root_dir)
       end
     end
   end,
@@ -147,6 +201,23 @@ return {
       end
     end,
   },
+
+  on_attach = function(client, bufnr)
+    -- avoid duplicate autocmds for same buffer
+    if vim.api.nvim_get_autocmds({ buffer = bufnr, group = group })[1] then
+      return
+    end
+
+    vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+      group = group,
+      buffer = bufnr,
+      callback = function()
+        refresh_diagnostics(client)
+      end,
+      desc = "roslyn_ls: refresh diagnostics",
+    })
+  end,
+
   capabilities = {
     -- HACK: Doesn't show any diagnostics if we do not set this to true
     textDocument = {
