@@ -6,7 +6,6 @@ vim.lsp.enable({
   "gopls",
   "lua_ls",
   "nixd",
-  "roslyn",
   "ruby_lsp",
   "rust_analyzer",
   "sqls",
