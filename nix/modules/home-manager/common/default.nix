@@ -69,7 +69,7 @@
       nixd
       nixfmt
       prettierd
-      # roslyn-ls
+      roslyn-ls
       ruby-lsp
       ruff
       rust-analyzer
