@@ -18,7 +18,6 @@ return {
     end
     on_dir(vim.iter(vim.fs.parents(fname)):find(has_fls_project_cfg) or vim.fs.root(0, ".git"))
   end,
-  settings = {},
   capabilities = {
     offsetEncoding = { "utf-8", "utf-16" },
   },

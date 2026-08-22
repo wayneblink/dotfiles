@@ -23,7 +23,10 @@
   home = {
     username = "${userConfig.name}";
     homeDirectory =
-      if pkgs.stdenv.isDarwin then "/Users/${userConfig.name}" else "/home/${userConfig.name}";
+      if pkgs.stdenv.hostPlatform.isDarwin then
+        "/Users/${userConfig.name}"
+      else
+        "/home/${userConfig.name}";
   };
 
   imports = [
@@ -83,8 +86,8 @@
       zls
       inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
     ]
-    ++ lib.optionals stdenv.isDarwin [ ]
-    ++ lib.optionals (!stdenv.isDarwin && !isWSL) [
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [ ]
+    ++ lib.optionals (!stdenv.hostPlatform.isDarwin && !isWSL) [
       # ((ffmpeg-full.override { withUnfree = true; withOpengl = true; }).overrideAttrs (_: { doCheck = false; }))
       firefox
       ghostty

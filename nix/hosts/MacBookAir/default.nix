@@ -58,11 +58,8 @@
 
   homebrew = {
     enable = true;
-    brews = with pkgs; [
-      "skhd-zig"
-    ];
     casks = with pkgs; [
-      "chromium"
+      "helium-browser"
       "firefox"
       "ghostty"
       "kitty"

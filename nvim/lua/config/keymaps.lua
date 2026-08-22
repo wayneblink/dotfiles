@@ -15,7 +15,15 @@ set("n", "<leader><leader>x", "<cmd>source %<CR>")
 set("n", "<leader>x", ":.lua<CR>")
 set("v", "<leader>x", ":.lua<CR>")
 
-vim.diagnostic.config({ jump = { float = true } })
+vim.diagnostic.config({
+  jump = {
+    on_jump = function(diagnostic, bufnr)
+      if diagnostic then
+        vim.diagnostic.open_float({ bufnr = bufnr })
+      end
+    end,
+  },
+})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
   desc = "Highlight when yanking (copying) text",
