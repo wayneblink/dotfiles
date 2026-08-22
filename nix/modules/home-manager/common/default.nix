@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   outputs,
   userConfig,
   pkgs,
@@ -84,7 +83,7 @@
       vtsls
       vue-language-server
       zls
-      inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
+      (if isWSL then pkgs.stable.opencode else pkgs.opencode)
     ]
     ++ lib.optionals stdenv.hostPlatform.isDarwin [ ]
     ++ lib.optionals (!stdenv.hostPlatform.isDarwin && !isWSL) [
