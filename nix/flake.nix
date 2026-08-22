@@ -81,13 +81,13 @@
       mkDarwinConfiguration =
         hostname: username:
         darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
           specialArgs = {
             inherit inputs outputs hostname;
             isWSL = false;
             userConfig = users.${username};
           };
           modules = [
+            { nixpkgs.hostPlatform = "aarch64-darwin"; }
             ./hosts/${hostname}
             home-manager.darwinModules.home-manager
             nix-homebrew.darwinModules.nix-homebrew

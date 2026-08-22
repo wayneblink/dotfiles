@@ -64,6 +64,9 @@ end
 local scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 config.color_scheme = scheme.color_scheme
 config.colors = { tab_bar = scheme.tab_bar }
+config.set_environment_variables = {
+	TERMINAL_THEME = scheme.color_scheme:find("Latte") and "light" or "dark",
+}
 config.warn_about_missing_glyphs = false
 config.enable_scroll_bar = true
 config.window_decorations = "RESIZE"
