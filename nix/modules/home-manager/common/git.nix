@@ -43,4 +43,8 @@
     enable = true;
     enableGitIntegration = true;
   };
+
+  programs.git.settings.delta = {
+    detect-dark-light = "always";
+  };
 }
